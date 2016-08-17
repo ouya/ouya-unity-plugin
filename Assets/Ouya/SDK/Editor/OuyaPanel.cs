@@ -1020,7 +1020,7 @@ public class OuyaPanel : EditorWindow
 
                 if (GUILayout.Button("Check for plugin updates"))
                 {
-                    Application.OpenURL("https://github.com/ouya/ouya-sdk-examples/tree/master/Unity/OuyaSDK");
+                    Application.OpenURL("https://github.com/ouya/ouya-unity-plugin");
                 }
 
                 if (GUILayout.Button("Visit Unity3d on OUYA Forum"))

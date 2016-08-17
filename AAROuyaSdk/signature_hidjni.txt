@@ -32,13 +32,13 @@ public class com.razerzone.turretmouse.HidJni {
   public void scanForMouse();
     Signature: ()V
 
-  public native int discoverMouseJNI();
+  public native int discoverMouseNative();
     Signature: ()I
 
-  public native int readReportLoopJNI();
+  public native int readReportLoopNative();
     Signature: ()I
 
-  public native int stopReadReportLoopJNI();
+  public native int stopReadReportLoopNative();
     Signature: ()I
 
   static android.os.Handler access$002(com.razerzone.turretmouse.HidJni, android.os.Handler);

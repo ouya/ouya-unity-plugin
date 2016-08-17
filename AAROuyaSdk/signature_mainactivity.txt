@@ -2,8 +2,10 @@ Compiled from "MainActivity.java"
 public class tv.ouya.sdk.MainActivity extends android.app.Activity {
   protected com.unity3d.player.UnityPlayer mUnityPlayer;
     Signature: Lcom/unity3d/player/UnityPlayer;
-  tv.ouya.sdk.OuyaInputView mInputView;
-    Signature: Ltv/ouya/sdk/OuyaInputView;
+  boolean mMouseServiceBound;
+    Signature: Z
+  com.razerzone.turretmouse.TurretMouseService$mouseReceiver mMouseReceiver;
+    Signature: Lcom/razerzone/turretmouse/TurretMouseService$mouseReceiver;
   public tv.ouya.sdk.MainActivity();
     Signature: ()V
 
@@ -52,6 +54,18 @@ public class tv.ouya.sdk.MainActivity extends android.app.Activity {
   public void useDefaultInput();
     Signature: ()V
 
-  static void access$000(tv.ouya.sdk.MainActivity);
+  static com.razerzone.turretmouse.TurretMouseService access$002(tv.ouya.sdk.MainActivity, com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Ltv/ouya/sdk/MainActivity;Lcom/razerzone/turretmouse/TurretMouseService;)Lcom/razerzone/turretmouse/TurretMouseService;
+
+  static com.razerzone.turretmouse.TurretMouseService access$000(tv.ouya.sdk.MainActivity);
+    Signature: (Ltv/ouya/sdk/MainActivity;)Lcom/razerzone/turretmouse/TurretMouseService;
+
+  static tv.ouya.sdk.OuyaInputView access$100(tv.ouya.sdk.MainActivity);
+    Signature: (Ltv/ouya/sdk/MainActivity;)Ltv/ouya/sdk/OuyaInputView;
+
+  static void access$200(tv.ouya.sdk.MainActivity);
     Signature: (Ltv/ouya/sdk/MainActivity;)V
+
+  static tv.ouya.sdk.OuyaInputView access$102(tv.ouya.sdk.MainActivity, tv.ouya.sdk.OuyaInputView);
+    Signature: (Ltv/ouya/sdk/MainActivity;Ltv/ouya/sdk/OuyaInputView;)Ltv/ouya/sdk/OuyaInputView;
 }

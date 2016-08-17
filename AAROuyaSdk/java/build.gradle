@@ -22,10 +22,11 @@ repositories {
 dependencies {
     provided files('libs/ouya-sdk.jar')
     provided files('libs/UnityPlayer.jar')
+    provided 'com.android.support:appcompat-v7:24.1.1'
 }
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion '24.0.1'
     defaultConfig {
         ndk {

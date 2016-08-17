@@ -17,31 +17,29 @@
 package tv.ouya.sdk;
 
 import android.app.Activity;
-import android.app.NativeActivity;
 import android.content.*;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import com.razerzone.turretmouse.TurretMouseService;
 import com.unity3d.player.UnityPlayer;
 
 import java.io.InputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import tv.ouya.console.api.*;
-import tv.ouya.sdk.*;
+import tv.ouya.console.api.OuyaController;
+import tv.ouya.console.api.OuyaIntent;
 
 public class MainActivity extends Activity
 {
@@ -53,7 +51,69 @@ public class MainActivity extends Activity
 
 	protected UnityPlayer mUnityPlayer;		// don't change the name of this variable; referenced from native code
 
-	OuyaInputView mInputView = null;
+    private OuyaInputView mInputView = null;
+
+    private TurretMouseService mMouseService = null;
+
+    boolean mMouseServiceBound = false;
+
+    TurretMouseService.mouseReceiver mMouseReceiver = new TurretMouseService.mouseReceiver() {
+        @Override
+        public void onMouseAction(final int[] mouseInfo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.v(TAG, "Calling mouseReceiver: " + mouseInfo.length);
+                    for (int i = 1; i < mouseInfo.length; i++) {
+                        switch (i) {
+                            case 1:
+                                Log.v(TAG, "Mouse X: "+Integer.toString(mouseInfo[i]));
+                                break;
+                            case 2:
+                                Log.v(TAG, "Mouse Y: "+Integer.toString(mouseInfo[i]));
+                                break;
+                            case 3:
+                                Log.v(TAG, "Mouse Wheel: "+Integer.toString(mouseInfo[i]));
+                                break;
+                            case 4:
+                                Log.v(TAG, "Mouse X Screen Position: "+Integer.toString(mouseInfo[i]));
+                                break;
+                            case 5:
+                                Log.v(TAG, "Mouse Y Screen Position: "+Integer.toString(mouseInfo[i]));
+                                break;
+                        }
+                    }
+                }
+            });
+        }
+    };
+
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection mMouseConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to BLEmouseDriver, cast the IBinder and get LocalService instance
+            TurretMouseService.LocalBinder binder = (TurretMouseService.LocalBinder) service;
+            mMouseService = binder.getService();
+
+            mMouseService.setMouseReceiver(mMouseReceiver);
+            mMouseService.setDisplayResolution(1920, 1080);
+            mMouseService.setSensitivity(1, 1);
+            mMouseService.setCursorPosition(0, 0);
+            mMouseService.setPolling(false);
+
+            mMouseServiceBound = true;
+            //Log.v("ON MOUSE ACTION BODY", "mMouseService.startScanForMouse()");
+            mMouseService.startScanForMouse();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mMouseServiceBound = false;
+            mMouseService = null;
+        }
+    };
 
 	// Setup activity layout
 	@Override protected void onCreate (Bundle savedInstanceState)
@@ -162,6 +222,11 @@ public class MainActivity extends Activity
 		if (null != mInputView) {
 			mInputView.requestFocus();
 		}
+
+        if (mMouseServiceBound) {
+            unbindService(mMouseConnection);
+            mMouseServiceBound = false;
+        }
 	}
 
 	// Resume Unity
@@ -176,6 +241,9 @@ public class MainActivity extends Activity
 		if (null != mInputView) {
 			mInputView.requestFocus();
 		}
+
+        Intent intent = new Intent(this, TurretMouseService.class);
+        bindService(intent, mMouseConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	// This ensures the layout will be correct.
