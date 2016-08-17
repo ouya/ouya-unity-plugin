@@ -65,24 +65,24 @@ public class MainActivity extends Activity
         public void onMouseAction(final int[] mouseInfo) {
             if (sEnableLogging) {
                 Log.v(TAG, "Calling mouseReceiver: " + mouseInfo.length);
-                if (0x00 != ( TurretMouseService.BUTTON_LEFT & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_LEFT & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_LEFT" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_RIGHT & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_RIGHT & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_RIGHT" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_MIDDLE & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_MIDDLE & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_MIDDLE" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_BACK & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_BACK & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_BACK" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_FORWARD & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_FORWARD & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_FORWARD" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_6 & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_6 & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_6" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_7 & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_7 & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_7" + "\n");
-                if (0x00 != ( TurretMouseService.BUTTON_8 & mouseInfo[0] ))
+                if (0 != ( TurretMouseService.BUTTON_8 & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_8" + "\n");
             }
-            for (int i = 1; i < mouseInfo.length; i++) {
+            for (int i = 0; i < mouseInfo.length; i++) {
                 setTurretMouseInfoNative(i, mouseInfo[i]);
                 if (sEnableLogging) {
                     switch (i) {

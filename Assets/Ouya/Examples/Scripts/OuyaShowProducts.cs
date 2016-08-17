@@ -253,15 +253,15 @@ public class OuyaShowProducts : MonoBehaviour
         }
     }
 
-    #region Data containers
+#region Data containers
 
     private List<OuyaSDK.Product> m_products = new List<OuyaSDK.Product>();
 
     private List<OuyaSDK.Receipt> m_receipts = new List<OuyaSDK.Receipt>();
 
-    #endregion
+#endregion
 
-    #region Presentation
+#region Presentation
 
     private void OnGUI()
     {
@@ -333,11 +333,18 @@ public class OuyaShowProducts : MonoBehaviour
             GUILayout.Space(400);
             GUILayout.Label(string.Format("Turret: Mouse: X={0} Y={1}", OuyaSDK.OuyaInput.GetTurretMouseInfo(4), OuyaSDK.OuyaInput.GetTurretMouseInfo(5)));
             int turretButtons = OuyaSDK.OuyaInput.GetTurretMouseInfo(0);
-            GUILayout.Label(string.Format("Left Button: {0} Right Button={1}",
-                (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_LEFT) != 0, //left button
-                (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_RIGHT) != 0 //right button
-                ));
+            GUILayout.Label(string.Format("Buttons: Left={0} Right={1} Middle={2}",
+                (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_LEFT) != 0,
+                (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_RIGHT) != 0,
+                (turretButtons & OuyaSDK.OuyaInput.TURRET_BUTTON_MIDDLE) != 0));
             GUILayout.EndHorizontal();
+
+#if false
+            for (int i = 0; i < 6; ++i)
+            {
+                GUILayout.Label(string.Format("Turret Mouse Info: i={0} Value={1}", i, OuyaSDK.OuyaInput.GetTurretMouseInfo(i)));
+            }
+#endif
 
             GUILayout.BeginHorizontal();
             GUILayout.Space(400);
@@ -528,9 +535,9 @@ public class OuyaShowProducts : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region Focus Handling
+#region Focus Handling
 
     public IEnumerator Start()
     {
@@ -668,6 +675,6 @@ public class OuyaShowProducts : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 #endif
 }

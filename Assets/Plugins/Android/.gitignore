@@ -1,0 +1,3 @@
+!libs/ouya-sdk.jar
+!libs/OuyaUnityPlugin.jar
+!libs/armeabi-v7a/lib-ouya-ndk.so
