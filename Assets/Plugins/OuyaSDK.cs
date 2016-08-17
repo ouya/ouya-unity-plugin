@@ -87,6 +87,10 @@ public static class OuyaSDK
         [DllImport("lib-ouya-ndk")]
         // EXPORT_API void clearButtons()
         public static extern void clearButtons();
+
+        [DllImport("lib-ouya-ndk")]
+        // EXPORT_API int getTurretMouseInfo(int index)
+        public static extern int getTurretMouseInfo(int index);
     }
 #endif
 
@@ -94,7 +98,7 @@ public static class OuyaSDK
 
     public class OuyaInput
     {
-        #region Private API
+    #region Private API
 
         private static object m_lockObject = new object();
         private static List<Dictionary<int, float>> m_axisStates = new List<Dictionary<int, float>>();
@@ -175,7 +179,7 @@ public static class OuyaSDK
             {
                 for (int deviceId = 0; deviceId < OuyaController.MAX_CONTROLLERS; ++deviceId)
                 {
-                    #region Track Axis States
+    #region Track Axis States
 
                     Dictionary<int, float> axisState = m_axisStates[deviceId];
                     axisState[OuyaController.AXIS_LS_X] = NdkWrapper.getAxis(deviceId, OuyaController.AXIS_LS_X);
@@ -185,9 +189,9 @@ public static class OuyaSDK
                     axisState[OuyaController.AXIS_L2] = NdkWrapper.getAxis(deviceId, OuyaController.AXIS_L2);
                     axisState[OuyaController.AXIS_R2] = NdkWrapper.getAxis(deviceId, OuyaController.AXIS_R2);
 
-                    #endregion
+    #endregion
 
-                    #region Track Button Up / Down States
+    #region Track Button Up / Down States
 
                     Dictionary<int, bool> buttonState = m_buttonStates[deviceId];
                     Dictionary<int, bool> buttonDownState = m_buttonDownStates[deviceId];
@@ -235,7 +239,7 @@ public static class OuyaSDK
                     buttonUpState[OuyaController.BUTTON_DPAD_LEFT] = NdkWrapper.isPressedUp(deviceId, OuyaController.BUTTON_DPAD_LEFT);
                     buttonUpState[OuyaController.BUTTON_MENU] = NdkWrapper.isPressedUp(deviceId, OuyaController.BUTTON_MENU);
 
-                    #endregion
+    #endregion
 
                     //debugOuyaController(deviceId);
                 }
@@ -255,6 +259,20 @@ public static class OuyaSDK
         public static void ClearButtons()
         {
             NdkWrapper.clearButtons();
+        }
+
+        public const int TURRET_MOUSE_BUTTON_LEFT = 0x01 << 0;
+        public const int TURRET_MOUSE_BUTTON_RIGHT = 0x01 << 1;
+        public const int TURRET_BUTTON_MIDDLE = 0x01 << 2;
+        public const int TURRET_BUTTON_BACK = 0x01 << 3;
+        public const int TURRET_BUTTON_FORWARD = 0x01 << 4;
+        public const int TURRET_BUTTON_6 = 0x01 << 5;
+        public const int TURRET_BUTTON_7 = 0x01 << 6;
+        public const int TURRET_BUTTON_8 = 0x01 << 7;
+
+        public static int GetTurretMouseInfo(int index)
+        {
+            return NdkWrapper.getTurretMouseInfo(index);
         }
 
         private static void debugOuyaController(int deviceId, int button)
@@ -287,9 +305,9 @@ public static class OuyaSDK
             debugOuyaController(deviceId, OuyaController.BUTTON_MENU);
         }
 
-        #endregion
+    #endregion
 
-        #region Public API
+    #region Public API
 
         public static bool IsControllerConnected(int playerNum)
         {
@@ -411,7 +429,7 @@ public static class OuyaSDK
             return false;
         }
 
-        #endregion
+    #endregion
     }
 
 #endif

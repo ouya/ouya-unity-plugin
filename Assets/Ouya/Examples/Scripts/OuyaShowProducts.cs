@@ -331,6 +331,16 @@ public class OuyaShowProducts : MonoBehaviour
 
             GUILayout.BeginHorizontal();
             GUILayout.Space(400);
+            GUILayout.Label(string.Format("Turret: Mouse: X={0} Y={1}", OuyaSDK.OuyaInput.GetTurretMouseInfo(4), OuyaSDK.OuyaInput.GetTurretMouseInfo(5)));
+            int turretButtons = OuyaSDK.OuyaInput.GetTurretMouseInfo(0);
+            GUILayout.Label(string.Format("Left Button: {0} Right Button={1}",
+                (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_LEFT) != 0, //left button
+                (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_RIGHT) != 0 //right button
+                ));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Space(400);
             GUILayout.Label(string.Format("IsRunningOnOUYAHardware: {0}", m_isRunningOnOUYAHardware));
             GUILayout.EndHorizontal();
 

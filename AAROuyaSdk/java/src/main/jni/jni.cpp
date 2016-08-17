@@ -24,6 +24,7 @@ static std::vector< std::map<int, bool> > g_buttonDown;
 static std::vector< std::map<int, bool> > g_buttonUp;
 static std::vector< std::map<int, bool> > g_lastButtonDown;
 static std::vector< std::map<int, bool> > g_lastButtonUp;
+static int g_turretMouseInfo[6] = {0};
 
 void dispatchGenericMotionEventNative(JNIEnv* env, jobject thiz,
 									  jint deviceId,
@@ -107,6 +108,14 @@ static JNINativeMethod method_table5[] = {
 
 static int method_table_size5 = sizeof(method_table5) / sizeof(method_table5[0]);
 
+void setTurretMouseInfoNative(JNIEnv* env, jobject obj, jint index, jint value);
+
+static JNINativeMethod method_table6[] = {
+        { "setTurretMouseInfoNative", "(II)V", (void *)setTurretMouseInfoNative }
+};
+
+static int method_table_size6 = sizeof(method_table6) / sizeof(method_table6[0]);
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved)
 {
 #if VERBOSE_LOGGING
@@ -139,6 +148,17 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
     else
     {
         __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find HidJni class");
+        return JNI_ERR;
+    }
+
+    clazz = env->FindClass("tv/ouya/sdk/MainActivity");
+    if (clazz)
+    {
+        jint ret = env->RegisterNatives(clazz, method_table6, method_table_size6);
+    }
+    else
+    {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find MainActivity class");
         return JNI_ERR;
     }
 
@@ -647,4 +667,16 @@ bus_str(int bus)
 			return "Other";
 			break;
 	}
+}
+
+void setTurretMouseInfoNative(JNIEnv* env, jobject obj, jint index, jint value) {
+    g_turretMouseInfo[index] = value;
+}
+
+extern "C" int getTurretMouseInfo(int index) {
+    if (index < 0 ||
+        index > 6) {
+        return 0;
+    }
+    return g_turretMouseInfo[index];
 }

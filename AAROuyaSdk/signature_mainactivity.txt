@@ -9,6 +9,9 @@ public class tv.ouya.sdk.MainActivity extends android.app.Activity {
   public tv.ouya.sdk.MainActivity();
     Signature: ()V
 
+  public native void setTurretMouseInfoNative(int, int);
+    Signature: (II)V
+
   protected void onCreate(android.os.Bundle);
     Signature: (Landroid/os/Bundle;)V
 
