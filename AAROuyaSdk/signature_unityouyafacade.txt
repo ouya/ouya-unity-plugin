@@ -1,0 +1,68 @@
+Compiled from "UnityOuyaFacade.java"
+public class tv.ouya.sdk.UnityOuyaFacade {
+  public tv.ouya.sdk.UnityOuyaFacade(android.content.Context, android.os.Bundle, android.os.Bundle);
+    Signature: (Landroid/content/Context;Landroid/os/Bundle;Landroid/os/Bundle;)V
+
+  public void shutdown();
+    Signature: ()V
+
+  public boolean processActivityResult(int, int, android.content.Intent);
+    Signature: (IILandroid/content/Intent;)Z
+
+  public boolean isInitialized();
+    Signature: ()Z
+
+  public void requestProducts(java.util.ArrayList<tv.ouya.console.api.Purchasable>);
+    Signature: (Ljava/util/ArrayList;)V
+
+  public void requestGamerInfo();
+    Signature: ()V
+
+  public void putGameData(java.lang.String, java.lang.String);
+    Signature: (Ljava/lang/String;Ljava/lang/String;)V
+
+  public java.lang.String getGameData(java.lang.String);
+    Signature: (Ljava/lang/String;)Ljava/lang/String;
+
+  public void requestReceipts();
+    Signature: ()V
+
+  public java.lang.Boolean isRunningOnOUYASupportedHardware();
+    Signature: ()Ljava/lang/Boolean;
+
+  public void requestPurchase(tv.ouya.console.api.Product) throws java.security.GeneralSecurityException, java.io.UnsupportedEncodingException, org.json.JSONException;
+    Signature: (Ltv/ouya/console/api/Product;)V
+
+  public void saveOuyaMod(tv.ouya.console.api.content.OuyaMod, tv.ouya.console.api.content.OuyaMod$Editor);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;Ltv/ouya/console/api/content/OuyaMod$Editor;)V
+
+  public void getOuyaContentInstalled();
+    Signature: ()V
+
+  public void getOuyaContentPublished(tv.ouya.console.api.content.OuyaContent$SortMethod);
+    Signature: (Ltv/ouya/console/api/content/OuyaContent$SortMethod;)V
+
+  public void contentDelete(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public void contentPublish(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public void contentUnpublish(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public void contentDownload(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public java.lang.String getDeviceHardwareName();
+    Signature: ()Ljava/lang/String;
+
+  static boolean access$002(boolean);
+    Signature: (Z)Z
+
+  static java.lang.String access$100();
+    Signature: ()Ljava/lang/String;
+
+  static {};
+    Signature: ()V
+}

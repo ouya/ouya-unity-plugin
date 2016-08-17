@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+    }
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    provided files('libs/ouya-sdk.jar')
+    provided files('libs/UnityPlayer.jar')
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '24.0.1'
+    defaultConfig {
+        ndk {
+            moduleName 'lib-ouya-ndk'
+            abiFilters 'armeabi-v7a'
+            stl 'stlport_static'
+            cFlags '-Wno-error=format-security'
+            ldLibs 'c', 'm', 'log'
+        }
+        minSdkVersion 21
+        targetSdkVersion 21
+    }
+    productFlavors {
+    }
+}

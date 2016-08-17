@@ -1,0 +1,72 @@
+Compiled from "IOuyaActivity.java"
+public class tv.ouya.sdk.IOuyaActivity {
+  protected static android.app.Activity m_activity;
+    Signature: Landroid/app/Activity;
+  protected static tv.ouya.sdk.MainActivity s_mainActivity;
+    Signature: Ltv/ouya/sdk/MainActivity;
+  protected static android.os.Bundle m_savedInstanceState;
+    Signature: Landroid/os/Bundle;
+  protected static tv.ouya.sdk.UnityOuyaFacade m_unityOuyaFacade;
+    Signature: Ltv/ouya/sdk/UnityOuyaFacade;
+  protected static byte[] m_applicationKey;
+    Signature: [B
+  protected static tv.ouya.console.api.content.OuyaContent m_ouyaContent;
+    Signature: Ltv/ouya/console/api/content/OuyaContent;
+  protected static java.util.List<tv.ouya.console.api.content.OuyaMod> m_ouyaContentInstalledResults;
+    Signature: Ljava/util/List;
+  protected static java.util.List<tv.ouya.console.api.content.OuyaMod> m_ouyaContentPublishedResults;
+    Signature: Ljava/util/List;
+  public tv.ouya.sdk.IOuyaActivity();
+    Signature: ()V
+
+  public static android.app.Activity GetActivity();
+    Signature: ()Landroid/app/Activity;
+
+  public static void SetActivity(android.app.Activity);
+    Signature: (Landroid/app/Activity;)V
+
+  public static tv.ouya.sdk.MainActivity GetMainActivity();
+    Signature: ()Ltv/ouya/sdk/MainActivity;
+
+  public static void SetMainActivity(tv.ouya.sdk.MainActivity);
+    Signature: (Ltv/ouya/sdk/MainActivity;)V
+
+  public static android.os.Bundle GetSavedInstanceState();
+    Signature: ()Landroid/os/Bundle;
+
+  public static void SetSavedInstanceState(android.os.Bundle);
+    Signature: (Landroid/os/Bundle;)V
+
+  public static tv.ouya.sdk.UnityOuyaFacade GetUnityOuyaFacade();
+    Signature: ()Ltv/ouya/sdk/UnityOuyaFacade;
+
+  public static void SetUnityOuyaFacade(tv.ouya.sdk.UnityOuyaFacade);
+    Signature: (Ltv/ouya/sdk/UnityOuyaFacade;)V
+
+  public static byte[] GetApplicationKey();
+    Signature: ()[B
+
+  public static void SetApplicationKey(byte[]);
+    Signature: ([B)V
+
+  public static tv.ouya.console.api.content.OuyaContent GetOuyaContent();
+    Signature: ()Ltv/ouya/console/api/content/OuyaContent;
+
+  public static void SetOuyaContent(tv.ouya.console.api.content.OuyaContent);
+    Signature: (Ltv/ouya/console/api/content/OuyaContent;)V
+
+  public static java.util.List<tv.ouya.console.api.content.OuyaMod> GetOuyaContentInstalledResults();
+    Signature: ()Ljava/util/List;
+
+  public static void SetOuyaContentInstalledResults(java.util.List<tv.ouya.console.api.content.OuyaMod>);
+    Signature: (Ljava/util/List;)V
+
+  public static java.util.List<tv.ouya.console.api.content.OuyaMod> GetOuyaContentPublishedResults();
+    Signature: ()Ljava/util/List;
+
+  public static void SetOuyaContentPublishedResults(java.util.List<tv.ouya.console.api.content.OuyaMod>);
+    Signature: (Ljava/util/List;)V
+
+  static {};
+    Signature: ()V
+}

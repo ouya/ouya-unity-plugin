@@ -1,0 +1,101 @@
+Compiled from "OuyaUnityPlugin.java"
+public class tv.ouya.sdk.OuyaUnityPlugin {
+  public tv.ouya.sdk.OuyaUnityPlugin(android.app.Activity);
+    Signature: (Landroid/app/Activity;)V
+
+  public static void initOuyaPlugin(java.lang.String);
+    Signature: (Ljava/lang/String;)V
+
+  public static boolean isInitialized();
+    Signature: ()Z
+
+  public static void putGameData(java.lang.String, java.lang.String);
+    Signature: (Ljava/lang/String;Ljava/lang/String;)V
+
+  public static java.lang.String getGameData(java.lang.String);
+    Signature: (Ljava/lang/String;)Ljava/lang/String;
+
+  public static void requestGamerInfo();
+    Signature: ()V
+
+  public static void requestProducts(java.lang.String);
+    Signature: (Ljava/lang/String;)V
+
+  public static void requestPurchase(java.lang.String);
+    Signature: (Ljava/lang/String;)V
+
+  public static void requestReceipts();
+    Signature: ()V
+
+  public static boolean isRunningOnOUYASupportedHardware();
+    Signature: ()Z
+
+  public static void setSafeArea(float);
+    Signature: (F)V
+
+  public static void clearFocus();
+    Signature: ()V
+
+  public static tv.ouya.console.api.content.OuyaContent getOuyaContent();
+    Signature: ()Ltv/ouya/console/api/content/OuyaContent;
+
+  public static void saveOuyaMod(tv.ouya.console.api.content.OuyaMod, tv.ouya.console.api.content.OuyaMod$Editor);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;Ltv/ouya/console/api/content/OuyaMod$Editor;)V
+
+  public static void getOuyaContentInstalled();
+    Signature: ()V
+
+  public static tv.ouya.console.api.content.OuyaMod[] getOuyaContentInstalledResults();
+    Signature: ()[Ltv/ouya/console/api/content/OuyaMod;
+
+  public static void getOuyaContentPublished(java.lang.String);
+    Signature: (Ljava/lang/String;)V
+
+  public static tv.ouya.console.api.content.OuyaMod[] getOuyaContentPublishedResults();
+    Signature: ()[Ltv/ouya/console/api/content/OuyaMod;
+
+  public static void contentDelete(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public static void contentPublish(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public static void contentUnpublish(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public static void contentDownload(tv.ouya.console.api.content.OuyaMod);
+    Signature: (Ltv/ouya/console/api/content/OuyaMod;)V
+
+  public static float getFloat(java.lang.Float);
+    Signature: (Ljava/lang/Float;)F
+
+  public static android.graphics.Bitmap[] getBitmapArray(java.util.List<android.graphics.Bitmap>);
+    Signature: (Ljava/util/List;)[Landroid/graphics/Bitmap;
+
+  public static tv.ouya.console.api.content.OuyaModScreenshot[] getOuyaModScreenshotArray(java.util.List<tv.ouya.console.api.content.OuyaModScreenshot>);
+    Signature: (Ljava/util/List;)[Ltv/ouya/console/api/content/OuyaModScreenshot;
+
+  public static java.lang.String[] getStringArray(java.util.List<java.lang.String>);
+    Signature: (Ljava/util/List;)[Ljava/lang/String;
+
+  public static java.lang.String getStringResource(java.lang.String);
+    Signature: (Ljava/lang/String;)Ljava/lang/String;
+
+  public static void shutdown();
+    Signature: ()V
+
+  public static java.lang.String getDeviceHardwareName();
+    Signature: ()Ljava/lang/String;
+
+  public static void useDefaultInput();
+    Signature: ()V
+
+  static java.lang.String access$000();
+    Signature: ()Ljava/lang/String;
+
+  static void access$100(float);
+    Signature: (F)V
+
+  static {};
+    Signature: ()V
+}

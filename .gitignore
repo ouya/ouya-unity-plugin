@@ -1,0 +1,13 @@
+Library/*
+obj/*
+Temp/*
+!Assets/Plugins/Android/libs/OuyaUnityPlugin.jar
+screenshot.png
+*.apk
+*.unitypackage
+*.csproj
+*.sln
+OuyaUnityPlugin.aar
+OuyaUnityPlugin.jar
+.vs/*
+*.unityproj

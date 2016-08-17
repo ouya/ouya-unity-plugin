@@ -1,0 +1,57 @@
+Compiled from "MainActivity.java"
+public class tv.ouya.sdk.MainActivity extends android.app.Activity {
+  protected com.unity3d.player.UnityPlayer mUnityPlayer;
+    Signature: Lcom/unity3d/player/UnityPlayer;
+  tv.ouya.sdk.OuyaInputView mInputView;
+    Signature: Ltv/ouya/sdk/OuyaInputView;
+  public tv.ouya.sdk.MainActivity();
+    Signature: ()V
+
+  protected void onCreate(android.os.Bundle);
+    Signature: (Landroid/os/Bundle;)V
+
+  protected void onDestroy();
+    Signature: ()V
+
+  public void onStart();
+    Signature: ()V
+
+  public void onStop();
+    Signature: ()V
+
+  protected void onPause();
+    Signature: ()V
+
+  protected void onResume();
+    Signature: ()V
+
+  public void onConfigurationChanged(android.content.res.Configuration);
+    Signature: (Landroid/content/res/Configuration;)V
+
+  public void onWindowFocusChanged(boolean);
+    Signature: (Z)V
+
+  public boolean dispatchGenericMotionEvent(android.view.MotionEvent);
+    Signature: (Landroid/view/MotionEvent;)Z
+
+  public boolean dispatchKeyEvent(android.view.KeyEvent);
+    Signature: (Landroid/view/KeyEvent;)Z
+
+  public boolean onGenericMotionEvent(android.view.MotionEvent);
+    Signature: (Landroid/view/MotionEvent;)Z
+
+  public boolean onKeyUp(int, android.view.KeyEvent);
+    Signature: (ILandroid/view/KeyEvent;)Z
+
+  public boolean onKeyDown(int, android.view.KeyEvent);
+    Signature: (ILandroid/view/KeyEvent;)Z
+
+  public void onActivityResult(int, int, android.content.Intent);
+    Signature: (IILandroid/content/Intent;)V
+
+  public void useDefaultInput();
+    Signature: ()V
+
+  static void access$000(tv.ouya.sdk.MainActivity);
+    Signature: (Ltv/ouya/sdk/MainActivity;)V
+}

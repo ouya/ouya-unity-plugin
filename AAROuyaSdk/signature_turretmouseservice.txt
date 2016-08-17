@@ -1,0 +1,213 @@
+Compiled from "TurretMouseService.java"
+public class com.razerzone.turretmouse.TurretMouseService extends android.app.Service {
+  public static final int BUTTON_LEFT;
+    Signature: I
+  public static final int BUTTON_RIGHT;
+    Signature: I
+  public static final int BUTTON_MIDDLE;
+    Signature: I
+  public static final int BUTTON_BACK;
+    Signature: I
+  public static final int BUTTON_FORWARD;
+    Signature: I
+  public static final int BUTTON_6;
+    Signature: I
+  public static final int BUTTON_7;
+    Signature: I
+  public static final int BUTTON_8;
+    Signature: I
+  public com.razerzone.turretmouse.TurretMouseService();
+    Signature: ()V
+
+  public static com.razerzone.turretmouse.TurretMouseService getInstance();
+    Signature: ()Lcom/razerzone/turretmouse/TurretMouseService;
+
+  public void onCreate();
+    Signature: ()V
+
+  public void onDestroy();
+    Signature: ()V
+
+  public void setPolling(boolean);
+    Signature: (Z)V
+
+  public void setDisplayResolution(int, int);
+    Signature: (II)V
+
+  public void setCursorPosition(int, int);
+    Signature: (II)V
+
+  public void setSensitivity(double);
+    Signature: (D)V
+
+  public void setSensitivity(double, double);
+    Signature: (DD)V
+
+  public void setMouseReceiver(com.razerzone.turretmouse.TurretMouseService$mouseReceiver);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService$mouseReceiver;)V
+
+  public com.razerzone.turretmouse.TurretMouseService$mouseReceiver getMouseReceiver();
+    Signature: ()Lcom/razerzone/turretmouse/TurretMouseService$mouseReceiver;
+
+  public int[] pollMouse();
+    Signature: ()[I
+
+  public int[] getDisplayResolution();
+    Signature: ()[I
+
+  public double getSensitivity();
+    Signature: ()D
+
+  public double getmSensitivityX();
+    Signature: ()D
+
+  public double getmSensitivityY();
+    Signature: ()D
+
+  public boolean ismConnected();
+    Signature: ()Z
+
+  public java.lang.String getName();
+    Signature: ()Ljava/lang/String;
+
+  public int getProductId();
+    Signature: ()I
+
+  public int getVendorId();
+    Signature: ()I
+
+  public java.lang.String getAddress();
+    Signature: ()Ljava/lang/String;
+
+  public java.lang.String toString();
+    Signature: ()Ljava/lang/String;
+
+  public android.os.IBinder onBind(android.content.Intent);
+    Signature: (Landroid/content/Intent;)Landroid/os/IBinder;
+
+  public boolean onUnbind(android.content.Intent);
+    Signature: (Landroid/content/Intent;)Z
+
+  public void showToast(java.lang.String, int);
+    Signature: (Ljava/lang/String;I)V
+
+  public void startScanForMouse();
+    Signature: ()V
+
+  public void stopScanForMouse();
+    Signature: ()V
+
+  public void parseRazerReport(byte[]);
+    Signature: ([B)V
+
+  public void disconnect();
+    Signature: ()V
+
+  static android.os.Handler access$002(com.razerzone.turretmouse.TurretMouseService, android.os.Handler);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Landroid/os/Handler;)Landroid/os/Handler;
+
+  static java.lang.String access$100();
+    Signature: ()Ljava/lang/String;
+
+  static boolean access$200(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Z
+
+  static boolean access$202(com.razerzone.turretmouse.TurretMouseService, boolean);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Z)Z
+
+  static boolean access$300(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Z
+
+  static android.os.Handler access$400(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Landroid/os/Handler;
+
+  static android.bluetooth.BluetoothDevice access$502(com.razerzone.turretmouse.TurretMouseService, android.bluetooth.BluetoothDevice);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Landroid/bluetooth/BluetoothDevice;)Landroid/bluetooth/BluetoothDevice;
+
+  static android.bluetooth.BluetoothDevice access$500(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Landroid/bluetooth/BluetoothDevice;
+
+  static boolean access$600(com.razerzone.turretmouse.TurretMouseService, android.bluetooth.BluetoothDevice);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Landroid/bluetooth/BluetoothDevice;)Z
+
+  static java.util.List access$700(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Ljava/util/List;
+
+  static java.lang.String access$800(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Ljava/lang/String;
+
+  static void access$900(com.razerzone.turretmouse.TurretMouseService, android.bluetooth.BluetoothGattCharacteristic);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Landroid/bluetooth/BluetoothGattCharacteristic;)V
+
+  static java.lang.String access$1000(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Ljava/lang/String;
+
+  static void access$1100(com.razerzone.turretmouse.TurretMouseService, boolean);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Z)V
+
+  static com.razerzone.turretmouse.HidJni access$1200(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Lcom/razerzone/turretmouse/HidJni;
+
+  static void access$1300(com.razerzone.turretmouse.TurretMouseService, android.bluetooth.BluetoothGattService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Landroid/bluetooth/BluetoothGattService;)V
+
+  static android.bluetooth.BluetoothDevice access$1402(com.razerzone.turretmouse.TurretMouseService, android.bluetooth.BluetoothDevice);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Landroid/bluetooth/BluetoothDevice;)Landroid/bluetooth/BluetoothDevice;
+
+  static boolean access$302(com.razerzone.turretmouse.TurretMouseService, boolean);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Z)Z
+
+  static java.util.List access$702(com.razerzone.turretmouse.TurretMouseService, java.util.List);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Ljava/util/List;)Ljava/util/List;
+
+  static int access$1502(com.razerzone.turretmouse.TurretMouseService, int);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;I)I
+
+  static java.lang.String access$1600(com.razerzone.turretmouse.TurretMouseService, byte[]);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;[B)Ljava/lang/String;
+
+  static java.lang.String access$1700(com.razerzone.turretmouse.TurretMouseService, java.lang.String);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Ljava/lang/String;)Ljava/lang/String;
+
+  static void access$1800(com.razerzone.turretmouse.TurretMouseService, int, int);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;II)V
+
+  static void access$1900(com.razerzone.turretmouse.TurretMouseService, int);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;I)V
+
+  static boolean access$2000(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Z
+
+  static void access$2100(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)V
+
+  static boolean access$2002(com.razerzone.turretmouse.TurretMouseService, boolean);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Z)Z
+
+  static android.os.Handler access$000(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Landroid/os/Handler;
+
+  static int access$2202(com.razerzone.turretmouse.TurretMouseService, int);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;I)I
+
+  static void access$2300(com.razerzone.turretmouse.TurretMouseService, java.lang.String);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Ljava/lang/String;)V
+
+  static android.bluetooth.BluetoothGatt access$2400(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Landroid/bluetooth/BluetoothGatt;
+
+  static boolean access$2500(com.razerzone.turretmouse.TurretMouseService);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;)Z
+
+  static boolean access$2502(com.razerzone.turretmouse.TurretMouseService, boolean);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Z)Z
+
+  static void access$2600(com.razerzone.turretmouse.TurretMouseService, java.lang.String, android.bluetooth.BluetoothGattCharacteristic);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Ljava/lang/String;Landroid/bluetooth/BluetoothGattCharacteristic;)V
+
+  static boolean access$2702(com.razerzone.turretmouse.TurretMouseService, boolean);
+    Signature: (Lcom/razerzone/turretmouse/TurretMouseService;Z)Z
+
+  static {};
+    Signature: ()V
+}
