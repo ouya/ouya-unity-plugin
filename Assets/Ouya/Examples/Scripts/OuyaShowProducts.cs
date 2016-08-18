@@ -331,6 +331,10 @@ public class OuyaShowProducts : MonoBehaviour
             GUILayout.BeginHorizontal();
             GUILayout.Space(400);
             GUILayout.Label(string.Format("Input: Mouse: X={0} Y={1} Z={2}", Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
+            GUILayout.Label(string.Format("Buttons: Left={0} Right={1} Middle={2}",
+                Input.GetMouseButtonDown(0),
+                Input.GetMouseButtonDown(1),
+                Input.GetMouseButtonDown(2)));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -345,6 +349,9 @@ public class OuyaShowProducts : MonoBehaviour
                 (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_RIGHT) != 0,
                 (turretButtons & OuyaSDK.OuyaInput.TURRET_BUTTON_MIDDLE) != 0));
             GUILayout.EndHorizontal();
+
+            GUI.Label(new Rect(OuyaSDK.OuyaInput.GetTurretMouseInfo(4),
+                Screen.height - OuyaSDK.OuyaInput.GetTurretMouseInfo(5), 10, 20), "x");
 
 #if false
             for (int i = 0; i < 6; ++i)
