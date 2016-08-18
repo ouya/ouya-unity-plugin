@@ -47,6 +47,8 @@ public class MainActivity extends Activity
 
 	private static final String PLUGIN_VERSION = "2.1.0.4";
 
+    private static final int TURRET_MOUSE_BUTTON_INDEX = 0;
+
     private static final int TURRET_MOUSE_Y_INDEX = 5;
 
     private static final int TURRET_MOUSE_Z_INDEX = 3;
@@ -96,7 +98,16 @@ public class MainActivity extends Activity
 
             long downTime = 0;
             long eventTime = 0;
+
             int action = 0;
+
+            int buttons = mouseInfo[TURRET_MOUSE_BUTTON_INDEX];
+            if (0 != (TurretMouseService.BUTTON_LEFT & buttons)) {
+                action = MotionEvent.ACTION_DOWN;
+            } else {
+                action = MotionEvent.ACTION_UP;
+            }
+
             int pointerCount = 1;
 
             MotionEvent.PointerProperties[] pointerProperties = new MotionEvent.PointerProperties[1];

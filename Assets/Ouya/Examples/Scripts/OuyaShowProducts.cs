@@ -350,8 +350,8 @@ public class OuyaShowProducts : MonoBehaviour
                 (turretButtons & OuyaSDK.OuyaInput.TURRET_BUTTON_MIDDLE) != 0));
             GUILayout.EndHorizontal();
 
-            GUI.Label(new Rect(OuyaSDK.OuyaInput.GetTurretMouseInfo(4),
-                Screen.height - OuyaSDK.OuyaInput.GetTurretMouseInfo(5), 10, 20), "x");
+            GUI.Label(new Rect(OuyaSDK.OuyaInput.GetTurretMouseInfo(4) - 5,
+                Screen.height - OuyaSDK.OuyaInput.GetTurretMouseInfo(5) - 5, 10, 20), "x");
 
 #if false
             for (int i = 0; i < 6; ++i)
