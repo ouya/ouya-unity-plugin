@@ -169,7 +169,7 @@ public class OuyaShowProducts : MonoBehaviour
             // Product down goes to the next element
             if ((index + 1) < products.Count)
             {
-                m_focusManager.Mappings[product].Down = products[index+1];
+                m_focusManager.Mappings[product].Down = products[index + 1];
             }
             // Product up goes to the previous element
             if (index > 0)
@@ -253,15 +253,15 @@ public class OuyaShowProducts : MonoBehaviour
         }
     }
 
-#region Data containers
+    #region Data containers
 
     private List<OuyaSDK.Product> m_products = new List<OuyaSDK.Product>();
 
     private List<OuyaSDK.Receipt> m_receipts = new List<OuyaSDK.Receipt>();
 
-#endregion
+    #endregion
 
-#region Presentation
+    #region Presentation
 
     private void OnGUI()
     {
@@ -269,7 +269,6 @@ public class OuyaShowProducts : MonoBehaviour
         {
             Color oldColor = GUI.backgroundColor;
 
-            GUILayout.Label(string.Empty);
             GUILayout.Label(string.Empty);
             GUILayout.Label(string.Empty);
             GUILayout.Label(string.Empty);
@@ -331,7 +330,15 @@ public class OuyaShowProducts : MonoBehaviour
 
             GUILayout.BeginHorizontal();
             GUILayout.Space(400);
-            GUILayout.Label(string.Format("Turret: Mouse: X={0} Y={1}", OuyaSDK.OuyaInput.GetTurretMouseInfo(4), OuyaSDK.OuyaInput.GetTurretMouseInfo(5)));
+            GUILayout.Label(string.Format("Input: Mouse: X={0} Y={1} Z={2}", Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Space(400);
+            GUILayout.Label(string.Format("Turret: Mouse: X={0} Y={1} Z={2}", 
+                OuyaSDK.OuyaInput.GetTurretMouseInfo(4),
+                OuyaSDK.OuyaInput.GetTurretMouseInfo(5),
+                OuyaSDK.OuyaInput.GetTurretMouseInfo(3)));
             int turretButtons = OuyaSDK.OuyaInput.GetTurretMouseInfo(0);
             GUILayout.Label(string.Format("Buttons: Left={0} Right={1} Middle={2}",
                 (turretButtons & OuyaSDK.OuyaInput.TURRET_MOUSE_BUTTON_LEFT) != 0,
@@ -371,7 +378,6 @@ public class OuyaShowProducts : MonoBehaviour
             GUILayout.Label(string.Format("Status: {0}", m_status));
             GUILayout.EndHorizontal();
 
-            GUILayout.Label(string.Empty);
             GUILayout.Label(string.Empty);
 
             GUILayout.BeginHorizontal();
@@ -535,9 +541,9 @@ public class OuyaShowProducts : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
-#region Focus Handling
+    #region Focus Handling
 
     public IEnumerator Start()
     {
@@ -675,6 +681,6 @@ public class OuyaShowProducts : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 #endif
 }

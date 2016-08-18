@@ -31,7 +31,6 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.razerzone.turretmouse.TurretMouseService;
 import com.unity3d.player.UnityPlayer;
@@ -48,6 +47,10 @@ public class MainActivity extends Activity
 
 	private static final String PLUGIN_VERSION = "2.1.0.4";
 
+    private static final int TURRET_MOUSE_Y_INDEX = 5;
+
+    private static final int TURRET_MOUSE_Z_INDEX = 3;
+
 	private static final boolean sEnableLogging = false;
 
 	protected UnityPlayer mUnityPlayer;		// don't change the name of this variable; referenced from native code
@@ -59,6 +62,10 @@ public class MainActivity extends Activity
     boolean mMouseServiceBound = false;
 
     public native void setTurretMouseInfoNative(int index, int value);
+
+    private static int sDisplayWidth = 1920;
+
+    private static int sDisplayHeight = 1080;
 
     TurretMouseService.mouseReceiver mMouseReceiver = new TurretMouseService.mouseReceiver() {
         @Override
@@ -82,9 +89,64 @@ public class MainActivity extends Activity
                 if (0 != ( TurretMouseService.BUTTON_8 & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_8" + "\n");
             }
-            for (int i = 0; i < mouseInfo.length; i++) {
+
+            int y = mouseInfo[TURRET_MOUSE_Y_INDEX];
+            int invertY = sDisplayHeight - y;
+            int z = mouseInfo[TURRET_MOUSE_Z_INDEX];
+
+            long downTime = 0;
+            long eventTime = 0;
+            int action = 0;
+            int pointerCount = 1;
+
+            MotionEvent.PointerProperties[] pointerProperties = new MotionEvent.PointerProperties[1];
+            MotionEvent.PointerCoords[] pointerCoords = new MotionEvent.PointerCoords[1];
+
+            long pointerIndex = 0;
+
+            MotionEvent.PointerProperties properties = new MotionEvent.PointerProperties();
+            properties.id = (int)pointerIndex;
+            properties.toolType = 0;
+            pointerProperties[0] = properties;
+
+            MotionEvent.PointerCoords coords = new MotionEvent.PointerCoords();
+            coords.orientation = 0;
+            coords.pressure = 0;
+            coords.size = 0;
+            coords.toolMajor = 0;
+            coords.toolMinor = 0;
+            coords.touchMajor = 0;
+            coords.touchMinor = 0;
+            coords.x = mouseInfo[4];
+            coords.y = y;
+            coords.setAxisValue(MotionEvent.AXIS_X, mouseInfo[4]);
+            coords.setAxisValue(MotionEvent.AXIS_Y, y);
+            coords.setAxisValue(MotionEvent.AXIS_VSCROLL, z);
+            pointerCoords[0] = coords;
+
+            int metaState = 0;
+            int buttonState = 0;
+            float xPrecision = 0;
+            float yPrecision = 0;
+            int deviceId = 0;
+            int edgeFlags = 0;
+            int source = InputDevice.SOURCE_MOUSE;
+            int flags = 0;
+            MotionEvent motionEvent = MotionEvent.obtain(downTime, eventTime, action, pointerCount, pointerProperties,
+                    pointerCoords, metaState, buttonState, xPrecision, yPrecision, deviceId,
+                    edgeFlags, source, flags);
+
+            // inject the mouse event into Unity PLayer
+            mUnityPlayer.injectEvent(motionEvent);
+
+            // populate the Turret Mouse API
+            for (int i = 0; i < TURRET_MOUSE_Y_INDEX; i++) {
                 setTurretMouseInfoNative(i, mouseInfo[i]);
-                if (sEnableLogging) {
+            }
+            setTurretMouseInfoNative(TURRET_MOUSE_Y_INDEX, invertY);
+
+            if (sEnableLogging) {
+                for (int i = 0; i < mouseInfo.length; i++) {
                     switch (i) {
                         case 1:
                             Log.v(TAG, "Mouse X: " + Integer.toString(mouseInfo[i]));
@@ -117,7 +179,7 @@ public class MainActivity extends Activity
             mMouseService = binder.getService();
 
             mMouseService.setMouseReceiver(mMouseReceiver);
-            mMouseService.setDisplayResolution(1920, 1080);
+            mMouseService.setDisplayResolution(sDisplayWidth, sDisplayHeight);
             mMouseService.setSensitivity(1, 1);
             mMouseService.setCursorPosition(0, 0);
             mMouseService.setPolling(false);
