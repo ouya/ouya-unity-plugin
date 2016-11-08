@@ -45,7 +45,7 @@ public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
 
-	private static final String PLUGIN_VERSION = "2.1.0.4";
+	private static final String PLUGIN_VERSION = "2.1.0.5";
 
     private static final int TURRET_MOUSE_BUTTON_INDEX = 0;
 
@@ -53,7 +53,7 @@ public class MainActivity extends Activity
 
     private static final int TURRET_MOUSE_Z_INDEX = 3;
 
-	private static final boolean sEnableLogging = false;
+	private static final boolean sEnableLogging = true;
 
 	protected UnityPlayer mUnityPlayer;		// don't change the name of this variable; referenced from native code
 

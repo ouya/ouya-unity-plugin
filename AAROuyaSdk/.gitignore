@@ -1,6 +1,3 @@
 .gradle
 build/*
-.idea/misc.xml
-.idea/workspace.xml
-.idea/java.iml
-.idea/runConfigurations.xml
+.idea/*
