@@ -7,7 +7,7 @@
 
 #define trace(fmt, ...) __android_log_print(ANDROID_LOG_DEBUG, "JNI", "trace: %s (%i) " fmt, __FUNCTION__, __LINE__, __VA_ARGS__)
 
-#define PLUGIN_VERSION "2.1.0.5"
+#define PLUGIN_VERSION "2.1.0.6"
 
 #define LOG_TAG "lib-ouya-ndk.cpp"
 
@@ -24,6 +24,7 @@ static std::vector< std::map<int, bool> > g_buttonDown;
 static std::vector< std::map<int, bool> > g_buttonUp;
 static std::vector< std::map<int, bool> > g_lastButtonDown;
 static std::vector< std::map<int, bool> > g_lastButtonUp;
+static int g_sdk_version = -1;
 static int g_turretMouseInfo[6] = {0};
 
 void dispatchGenericMotionEventNative(JNIEnv* env, jobject thiz,
@@ -138,7 +139,12 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 		return JNI_ERR;
 	}
 
-    jclass clazz = env->FindClass("com/razerzone/turretmouse/HidJni");
+    jclass clazz = env->FindClass("android/os/Build$VERSION");
+    jfieldID sdkIntFieldID = env->GetStaticFieldID(clazz, "SDK_INT", "I");
+    g_sdk_version = env->GetStaticIntField(clazz, sdkIntFieldID);
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "Android SDK Version=%d", g_sdk_version);
+
+    clazz = env->FindClass("com/razerzone/turretmouse/HidJni");
     if (clazz)
     {
         jint ret = env->RegisterNatives(clazz, method_table3, method_table_size3);
@@ -424,11 +430,21 @@ jint discoverMouseNative(JNIEnv* env, jobject obj)
 		/* Open the Device with blocking reads. In real life,
            don't use a hard coded path; use libudev instead. */
 
-		if (access(devLoc, R_OK) != -1) {
+        if (g_sdk_version == 0) {
+            // not set
+        }
+
+		else if ((g_sdk_version >= 23 && access(devLoc, R_OK) != -1) ||
+            (g_sdk_version < 23 && access(devLoc, F_OK) != -1)) {
 #if VERBOSE_LOGGING
 			LOGD("Attempt to open file");
 #endif
-			fd = open(devLoc, O_RDONLY/*|O_NONBLOCK*/);
+            if (g_sdk_version >= 23)
+            {
+                fd = open(devLoc, O_RDONLY/*|O_NONBLOCK*/);
+            } else {
+                fd = open(devLoc, O_RDWR/*|O_NONBLOCK*/);
+            }
 
 			if (fd < 0) {
 				char tempStr[16];
@@ -597,10 +613,23 @@ jint readReportLoopNative(JNIEnv* env, jobject obj)
 		return 0;
 	}
 
-	if(access(mouseLoc, R_OK) != -1) {
-		int fd = open(mouseLoc, O_RDONLY/*|O_NONBLOCK*/);
+    if (g_sdk_version == 0) {
+        // not set
+    }
 
-		while(access(mouseLoc, R_OK) != -1 && allowRead) {
+	else if ((g_sdk_version >= 23 && access(mouseLoc, R_OK) != -1) ||
+        (g_sdk_version < 23 && access(mouseLoc, F_OK) != -1)) {
+
+        int fd;
+        if (g_sdk_version >= 23 && access(mouseLoc, R_OK) != -1) {
+            fd = open(mouseLoc, O_RDONLY/*|O_NONBLOCK*/);
+        } else {
+            fd = open(mouseLoc, O_RDWR/*|O_NONBLOCK*/);
+        }
+
+		while(((g_sdk_version >= 23 && access(mouseLoc, R_OK) != -1) ||
+            (g_sdk_version < 23 && access(mouseLoc, F_OK) != -1)) &&
+            allowRead) {
 			if (fd < 0) {
 				LOGE("Mouse disconnected");
 				allowRead = 0;
