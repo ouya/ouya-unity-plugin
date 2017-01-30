@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-#define XIAOMI
-
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -426,7 +424,11 @@ public class OuyaShowProducts : MonoBehaviour
                 (m_focusManager.SelectedButton == m_btnPutGameData &&
                 OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
             {
-                OuyaSDK.putGameData(KEY_PUT_GAME_DATA, "This is a test!!!!");
+                if (m_gameData == "")
+                {
+                    m_gameData = "This is a test!!!!";
+                }
+                OuyaSDK.putGameData(KEY_PUT_GAME_DATA, m_gameData);
             }
             GUI.backgroundColor = oldColor;
 
@@ -441,7 +443,7 @@ public class OuyaShowProducts : MonoBehaviour
                 m_gameData = OuyaSDK.getGameData(KEY_PUT_GAME_DATA);
             }
             GUI.backgroundColor = oldColor;
-            GUILayout.Label(string.Format("GameData: {0}", m_gameData));
+            m_gameData = GUILayout.TextField(m_gameData, GUILayout.Width(300), GUILayout.Height(40));
             GUILayout.EndHorizontal();
 
             GUILayout.Label(string.Empty);
