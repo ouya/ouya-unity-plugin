@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012, 2013 OUYA, Inc.
+ * Copyright (C) 2012-2017 Razer, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 #if UNITY_ANDROID && !UNITY_EDITOR
 using tv.ouya.console.api;
 #endif
@@ -113,6 +114,21 @@ public class OuyaShowProducts : MonoBehaviour
         OuyaSDK.unregisterRequestProductsListener(this);
         OuyaSDK.unregisterRequestPurchaseListener(this);
         OuyaSDK.unregisterRequestReceiptsListener(this);
+    }
+
+    private bool IsPressed()
+    {
+        if (OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O))
+        {
+            return true;
+        }
+
+        if (OuyaSDK.OuyaInput.GetButtonUp(0, RazerTurretKeyboard.ENTER))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void OuyaMenuAppearing()
@@ -279,7 +295,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("Exit", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btnExit &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 m_status = "Exiting...";
                 OuyaSDK.shutdown();
@@ -298,7 +314,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("720p", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btn720 &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 m_status = "Setting 1280x720...";
                 Screen.SetResolution(1280, 720, true);
@@ -316,7 +332,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("1080p", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btn1080 &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 m_status = "Setting 1920x1080...";
                 Screen.SetResolution(1920, 1080, true);
@@ -403,7 +419,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("Request Gamer Info", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btnRequestGamerInfo &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 m_status = "Requesting gamer info...";
                 OuyaSDK.requestGamerInfo();
@@ -422,7 +438,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("Put Game Data", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btnPutGameData &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 if (m_gameData == "")
                 {
@@ -438,7 +454,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("Get Game Data", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btnGetGameData &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 m_gameData = OuyaSDK.getGameData(KEY_PUT_GAME_DATA);
             }
@@ -462,7 +478,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("Request Products", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btnRequestProducts &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 List<OuyaSDK.Purchasable> productIdentifierList =
                     new List<OuyaSDK.Purchasable>();
@@ -498,7 +514,7 @@ public class OuyaShowProducts : MonoBehaviour
                 }
                 if (GUILayout.Button("Request Purchase") ||
                     (m_focusManager.SelectedButton == product &&
-                    OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                    IsPressed()))
                 {
                     m_status = "Requesting purchase...";
                     //Debug.Log(string.Format("Purchase Identifier: {0}", product.identifier));
@@ -526,7 +542,7 @@ public class OuyaShowProducts : MonoBehaviour
             }
             if (GUILayout.Button("Request Receipts", GUILayout.Height(40)) ||
                 (m_focusManager.SelectedButton == m_btnRequestReceipts &&
-                OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
+                IsPressed()))
             {
                 m_status = "Requesting receipts...";
                 OuyaSDK.requestReceipts();
@@ -614,6 +630,17 @@ public class OuyaShowProducts : MonoBehaviour
 
     private void Update()
     {
+        foreach (FieldInfo fi in typeof(RazerTurretKeyboard).GetFields())
+        {
+            if (fi.FieldType == typeof(int))
+            {
+                int keycode = (int)fi.GetValue(null);
+                if (OuyaSDK.OuyaInput.GetButtonUp(keycode))
+                {
+                    Debug.Log(string.Format("Key Up: {0}", fi.Name));
+                }
+            }
+        }
         if (OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_DPAD_DOWN))
         {
             m_focusManager.FocusDown();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2014 OUYA, Inc.
+ * Copyright (C) 2012-2017 Razer, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
 
-	private static final String PLUGIN_VERSION = "2.1.0.6";
+	private static final String PLUGIN_VERSION = "2.1.0.8";
 
     private static final int TURRET_MOUSE_BUTTON_INDEX = 0;
 
@@ -210,7 +210,7 @@ public class MainActivity extends Activity
 	// Setup activity layout
 	@Override protected void onCreate (Bundle savedInstanceState)
 	{
-		Log.i(TAG, "OuyaUnityPlugin: VERSION="+PLUGIN_VERSION);
+		Log.d(TAG, "OuyaUnityPlugin: VERSION="+PLUGIN_VERSION);
 
 		//make activity accessible to Unity
 		IOuyaActivity.SetActivity(this);
@@ -276,11 +276,11 @@ public class MainActivity extends Activity
         @Override
         public void onReceive(Context context, Intent intent) {
 			if (sEnableLogging) {
-				Log.i(TAG, "BroadcastReceiver intent=" + intent.getAction());
+                Log.d(TAG, "BroadcastReceiver intent=" + intent.getAction());
 			}
 			if(intent.getAction().equals(OuyaIntent.ACTION_MENUAPPEARING)) {
 				if (sEnableLogging) {
-					Log.i(TAG, "OuyaGameObject->onMenuAppearing");
+                    Log.d(TAG, "OuyaGameObject->onMenuAppearing");
 				}
 				UnityPlayer.UnitySendMessage("OuyaGameObject", "onMenuAppearing", "");
 			}
@@ -359,7 +359,7 @@ public class MainActivity extends Activity
 	@Override
     public boolean dispatchGenericMotionEvent(MotionEvent motionEvent) {
     	if (sEnableLogging) {
-			Log.i(TAG, "dispatchGenericMotionEvent");
+            Log.d(TAG, "dispatchGenericMotionEvent");
 		}
 		if (null == mInputView) {
 			return super.dispatchGenericMotionEvent(motionEvent);
@@ -390,34 +390,45 @@ public class MainActivity extends Activity
 	@Override
     public boolean dispatchKeyEvent(KeyEvent keyEvent) {
     	if (sEnableLogging) {
-			Log.i(TAG, "dispatchKeyEvent keyCode="+keyEvent.getKeyCode());
+            Log.d(TAG, "dispatchKeyEvent keyCode="+keyEvent.getKeyCode());
 		}
+
 		if (null == mInputView) {
 			return super.dispatchKeyEvent(keyEvent);
 		}
+
 		InputDevice device = keyEvent.getDevice();
 		if (null != device) {
 			String name = device.getName();
+            if (null != name &&
+                name.equals("Razer Razer Turret Dongle") &&
+                mInputView.isNativeInitialized()) {
+                if (sEnableLogging) {
+                    Log.d(TAG, "dispatchKeyEventNative playerNum=0 keyCode="+keyEvent.getKeyCode()+" action="+keyEvent.getAction());
+                }
+                mInputView.dispatchKeyEventNative(0, keyEvent.getKeyCode(), keyEvent.getAction());
+                return true;
+            }
 			if (null != name &&
 				name.equals("aml_keypad")) {
 				switch (keyEvent.getKeyCode()) {
 				case 24:
 					if (sEnableLogging) {
-						Log.i(TAG, "Volume Up detected.");
+                        Log.d(TAG, "Volume Up detected.");
 					}
 					//raiseVolume();
 					//return true; //the volume was handled
 					return false; //show the xiaomi volume overlay
 				case 25:
 					if (sEnableLogging) {
-						Log.i(TAG, "Volume Down detected.");
+                        Log.d(TAG, "Volume Down detected.");
 					}
 					//lowerVolume();
 					//return true; //the volume was handled
 					return false; //show the xiaomi volume overlay
 				case 66:
 					if (sEnableLogging) {
-						Log.i(TAG, "Remote button detected.");
+                        Log.d(TAG, "Remote button detected.");
 					}
 					if (null != mInputView) {
 						if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
@@ -429,7 +440,7 @@ public class MainActivity extends Activity
 					return false;
 				case 4:
 					if (sEnableLogging) {
-						Log.i(TAG, "Remote back button detected.");
+                        Log.d(TAG, "Remote back button detected.");
 					}
 					if (null != mInputView) {
 						if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
@@ -451,7 +462,7 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onGenericMotionEvent(MotionEvent motionEvent) {
     	if (sEnableLogging) {
-			Log.i(TAG, "onGenericMotionEvent");
+            Log.d(TAG, "onGenericMotionEvent");
 		}
 		if (null == mInputView) {
 			return super.onGenericMotionEvent(motionEvent);
@@ -464,7 +475,7 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent keyEvent) {
     	if (sEnableLogging) {
-			Log.i(TAG, "onKeyUp");
+            Log.d(TAG, "onKeyUp");
 		}
     	if (null == mInputView) {
 			return super.onKeyUp(keyCode, keyEvent);
@@ -477,7 +488,7 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
     	if (sEnableLogging) {
-			Log.i(TAG, "onKeyDown");
+            Log.d(TAG, "onKeyDown");
 		}
 		if (null == mInputView) {
 			return super.onKeyDown(keyCode, keyEvent);
@@ -490,7 +501,7 @@ public class MainActivity extends Activity
     @Override
 	public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		if (sEnableLogging) {
-			Log.i(TAG, "onActivityResult");
+            Log.d(TAG, "onActivityResult");
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 		UnityOuyaFacade unityOuyaFacade = IOuyaActivity.GetUnityOuyaFacade();
@@ -511,7 +522,7 @@ public class MainActivity extends Activity
 			public void run()
 			{
 				if (null == mInputView) {
-					Log.i(TAG, "useDefaultInput: Focus the Unity Player");
+                    Log.d(TAG, "useDefaultInput: Focus the Unity Player");
 					giveUnityFocus();
 					return;
 				}
@@ -523,7 +534,7 @@ public class MainActivity extends Activity
 					Log.e(TAG, "Content view is missing");
 				}
 				mInputView = null;
-				Log.i(TAG, "useDefaultInput: Request focus for the Unity Player");
+                Log.d(TAG, "useDefaultInput: Request focus for the Unity Player");
 				giveUnityFocus();
 			}
 		};

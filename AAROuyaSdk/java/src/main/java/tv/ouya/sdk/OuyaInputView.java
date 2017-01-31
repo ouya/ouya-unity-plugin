@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2014 OUYA, Inc.
+ * Copyright (C) 2012-2017 Razer, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -93,6 +93,10 @@ public class OuyaInputView extends View {
 		} else {
 			Log.e(TAG, "init: Activity is null");
 		}
+	}
+
+	public boolean isNativeInitialized() {
+		return sNativeInitialized;
 	}
 	
 	public void shutdown() {

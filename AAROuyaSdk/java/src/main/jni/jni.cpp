@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2012-2017 Razer, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include <jni.h>
 #include <android/log.h>
 
@@ -7,7 +23,7 @@
 
 #define trace(fmt, ...) __android_log_print(ANDROID_LOG_DEBUG, "JNI", "trace: %s (%i) " fmt, __FUNCTION__, __LINE__, __VA_ARGS__)
 
-#define PLUGIN_VERSION "2.1.0.6"
+#define PLUGIN_VERSION "2.1.0.8"
 
 #define LOG_TAG "lib-ouya-ndk.cpp"
 
@@ -299,6 +315,9 @@ extern "C"
 	// clear the button state for detecting up and down
 	void clearButtonStates()
 	{
+#if VERBOSE_LOGGING
+		//__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "clearButtonStates:");
+#endif
 		if (g_buttonDown.size() == 0) {
 			return;
 		}

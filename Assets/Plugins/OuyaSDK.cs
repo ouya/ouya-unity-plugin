@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012, 2013 OUYA, Inc.
+ * Copyright (C) 2012-2017 Razer, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 #if UNITY_ANDROID && !UNITY_EDITOR
 using com.unity3d.player;
@@ -33,7 +34,7 @@ using UnityEngine;
 
 public static class OuyaSDK
 {
-    public const string PLUGIN_VERSION = "2.1.0.6";
+    public const string PLUGIN_VERSION = "2.1.0.8";
 
 #if UNITY_ANDROID && !UNITY_EDITOR
 
@@ -238,10 +239,29 @@ public static class OuyaSDK
                     buttonUpState[OuyaController.BUTTON_DPAD_RIGHT] = NdkWrapper.isPressedUp(deviceId, OuyaController.BUTTON_DPAD_RIGHT);
                     buttonUpState[OuyaController.BUTTON_DPAD_LEFT] = NdkWrapper.isPressedUp(deviceId, OuyaController.BUTTON_DPAD_LEFT);
                     buttonUpState[OuyaController.BUTTON_MENU] = NdkWrapper.isPressedUp(deviceId, OuyaController.BUTTON_MENU);
-
     #endregion
 
                     //debugOuyaController(deviceId);
+                }
+
+                UpdateRazerTurretKeyboard();
+            }
+        }
+
+        private static void UpdateRazerTurretKeyboard()
+        {
+            int playerNum = 0;
+            Dictionary<int, bool> buttonState = m_buttonStates[playerNum];
+            Dictionary<int, bool> buttonDownState = m_buttonDownStates[playerNum];
+            Dictionary<int, bool> buttonUpState = m_buttonUpStates[playerNum];
+            foreach (FieldInfo fi in typeof(RazerTurretKeyboard).GetFields())
+            {
+                if (fi.FieldType == typeof(int))
+                {
+                    int keycode = (int)fi.GetValue(null);
+                    buttonState[keycode] = NdkWrapper.isPressed(playerNum, keycode);
+                    buttonDownState[keycode] = NdkWrapper.isPressedDown(playerNum, keycode);
+                    buttonUpState[keycode] = NdkWrapper.isPressedUp(playerNum, keycode);
                 }
             }
         }
