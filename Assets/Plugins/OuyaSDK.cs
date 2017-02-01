@@ -251,9 +251,27 @@ public static class OuyaSDK
         private static void UpdateRazerTurretKeyboard()
         {
             int playerNum = 0;
+            if (null == m_buttonStates ||
+                m_buttonStates.Count == 0)
+            {
+                return;
+            }
             Dictionary<int, bool> buttonState = m_buttonStates[playerNum];
+
+            if (null == m_buttonDownStates ||
+                m_buttonDownStates.Count == 0)
+            {
+                return;
+            }
             Dictionary<int, bool> buttonDownState = m_buttonDownStates[playerNum];
+
+            if (null == m_buttonUpStates ||
+                m_buttonUpStates.Count == 0)
+            {
+                return;
+            }
             Dictionary<int, bool> buttonUpState = m_buttonUpStates[playerNum];
+
             foreach (FieldInfo fi in typeof(RazerTurretKeyboard).GetFields())
             {
                 if (fi.FieldType == typeof(int))
