@@ -56,7 +56,7 @@ public class MainActivity extends Activity
 
     private static final int TURRET_MOUSE_Z_INDEX = 3;
 
-	private static final boolean sEnableLogging = false;
+	private static final boolean sEnableLogging = true;
 
 	protected UnityPlayer mUnityPlayer;		// don't change the name of this variable; referenced from native code
 
@@ -303,8 +303,39 @@ public class MainActivity extends Activity
 
     @Override
     public void onStop() {
+        if (sEnableLogging) {
+            Log.d(TAG, "onStop:");
+        }
 		unregisterReceiver(mMenuAppearingReceiver);
         super.onStop();
+
+        if (mEnableQuitOnPause) {
+            if (sEnableLogging) {
+                Log.d(TAG, "onPause: mEnableQuitOnPause=true");
+            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Sorry, this game does not support pausing.");
+            builder.setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Process.killProcess(Process.myPid());
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialogInterface) {
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(View.INVISIBLE);
+                }
+            });
+            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialogInterface) {
+                    Process.killProcess(Process.myPid());
+                }
+            });
+            dialog.show();
+        }
     }
 
 	// Pause Unity
@@ -324,34 +355,6 @@ public class MainActivity extends Activity
             unbindService(mMouseConnection);
             mMouseServiceBound = false;
         }
-
-        if (mEnableQuitOnPause) {
-			if (sEnableLogging) {
-				Log.d(TAG, "onPause: mEnableQuitOnPause=true");
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Sorry, this game does not support pausing.");
-			builder.setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					Process.killProcess(Process.myPid());
-				}
-			});
-			final AlertDialog dialog = builder.create();
-			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-				@Override
-				public void onShow(DialogInterface dialogInterface) {
-					dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(View.INVISIBLE);
-				}
-			});
-			dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-				@Override
-				public void onCancel(DialogInterface dialogInterface) {
-					Process.killProcess(Process.myPid());
-				}
-			});
-            dialog.show();
-		}
 	}
 
 	// Resume Unity
