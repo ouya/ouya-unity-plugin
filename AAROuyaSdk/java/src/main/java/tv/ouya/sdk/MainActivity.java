@@ -48,7 +48,7 @@ public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
 
-	private static final String PLUGIN_VERSION = "2.1.0.9";
+	private static final String PLUGIN_VERSION = "2.1.0.10";
 
     private static final int TURRET_MOUSE_BUTTON_INDEX = 0;
 
@@ -56,7 +56,7 @@ public class MainActivity extends Activity
 
     private static final int TURRET_MOUSE_Z_INDEX = 3;
 
-	private static final boolean sEnableLogging = true;
+	private static final boolean sEnableLogging = false;
 
 	protected UnityPlayer mUnityPlayer;		// don't change the name of this variable; referenced from native code
 
@@ -73,6 +73,8 @@ public class MainActivity extends Activity
     private static int sDisplayHeight = 1080;
 
 	private boolean mEnableQuitOnPause = false;
+
+    private boolean mQuitAlertShown = false;
 
     TurretMouseService.mouseReceiver mMouseReceiver = new TurretMouseService.mouseReceiver() {
         @Override
@@ -95,6 +97,22 @@ public class MainActivity extends Activity
                     Log.v(TAG, "BUTTON_7" + "\n");
                 if (0 != ( TurretMouseService.BUTTON_8 & mouseInfo[0] ))
                     Log.v(TAG, "BUTTON_8" + "\n");
+            }
+
+            if (mEnableQuitOnPause && mQuitAlertShown && 0 != (TurretMouseService.BUTTON_LEFT & mouseInfo[0])) {
+
+                if (sEnableLogging) {
+                    Log.d(TAG, "Exiting via turret mouse");
+                }
+
+                if (mMouseServiceBound) {
+                    unbindService(mMouseConnection);
+                    mMouseServiceBound = false;
+                }
+
+                Process.killProcess(Process.myPid());
+
+                return;
             }
 
             int y = mouseInfo[TURRET_MOUSE_Y_INDEX];
@@ -318,6 +336,12 @@ public class MainActivity extends Activity
             builder.setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+
+                    if (mMouseServiceBound) {
+                        unbindService(mMouseConnection);
+                        mMouseServiceBound = false;
+                    }
+
                     Process.killProcess(Process.myPid());
                 }
             });
@@ -331,9 +355,20 @@ public class MainActivity extends Activity
             dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialogInterface) {
+
+                    if (mMouseServiceBound) {
+                        unbindService(mMouseConnection);
+                        mMouseServiceBound = false;
+                    }
+
                     Process.killProcess(Process.myPid());
                 }
             });
+
+            Intent intent = new Intent(this, TurretMouseService.class);
+            bindService(intent, mMouseConnection, Context.BIND_AUTO_CREATE);
+
+            mQuitAlertShown = true;
             dialog.show();
         }
     }
