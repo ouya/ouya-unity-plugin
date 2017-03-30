@@ -43,6 +43,7 @@ namespace tv.ouya.sdk
         private static IntPtr _jmGetStringArray = IntPtr.Zero;
         private static IntPtr _jmShutdown = IntPtr.Zero;
         private static IntPtr _jmUseDefaultInput = IntPtr.Zero;
+        private static IntPtr _jmEnableQuitOnPause = IntPtr.Zero;
         private IntPtr _instance = IntPtr.Zero;
 
         /// <summary>
@@ -549,6 +550,22 @@ namespace tv.ouya.sdk
                     string strMethod = "useDefaultInput";
                     _jmUseDefaultInput = AndroidJNI.GetStaticMethodID(_jcOuyaUnityPlugin, strMethod, "()V");
                     if (_jmUseDefaultInput != IntPtr.Zero)
+                    {
+#if VERBOSE_LOGGING
+                        Debug.Log(string.Format("Found {0} method", strMethod));
+#endif
+                    }
+                    else
+                    {
+                        Debug.LogError(string.Format("Failed to find {0} method", strMethod));
+                        return;
+                    }
+                }
+
+                {
+                    string strMethod = "enableQuitOnPause";
+                    _jmEnableQuitOnPause = AndroidJNI.GetStaticMethodID(_jcOuyaUnityPlugin, strMethod, "()V");
+                    if (_jmEnableQuitOnPause != IntPtr.Zero)
                     {
 #if VERBOSE_LOGGING
                         Debug.Log(string.Format("Found {0} method", strMethod));
@@ -1404,6 +1421,35 @@ namespace tv.ouya.sdk
             }
 
             string strMethod = "useDefaultInput";
+            IntPtr method = AndroidJNI.GetStaticMethodID(_jcOuyaUnityPlugin, strMethod, "()V");
+            if (method != IntPtr.Zero)
+            {
+#if VERBOSE_LOGGING
+                Debug.Log(string.Format("Found {0} method", strMethod));
+#endif
+            }
+            else
+            {
+                Debug.LogError(string.Format("Failed to find {0} method", strMethod));
+                return;
+            }
+
+            AndroidJNI.CallStaticVoidMethod(_jcOuyaUnityPlugin, method, new jvalue[] { });
+        }
+
+        public static void enableQuitOnPause()
+        {
+#if VERBOSE_LOGGING
+            Debug.Log(string.Format("Invoking {0}...", MethodBase.GetCurrentMethod().Name));
+#endif
+
+            if (_jcOuyaUnityPlugin == IntPtr.Zero)
+            {
+                Debug.LogError("_jcOuyaUnityPlugin is not initialized");
+                return;
+            }
+
+            string strMethod = "enableQuitOnPause";
             IntPtr method = AndroidJNI.GetStaticMethodID(_jcOuyaUnityPlugin, strMethod, "()V");
             if (method != IntPtr.Zero)
             {

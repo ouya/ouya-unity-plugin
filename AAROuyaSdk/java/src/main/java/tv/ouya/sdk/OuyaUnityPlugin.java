@@ -680,4 +680,13 @@ public class OuyaUnityPlugin
 		}
 		mainActivity.useDefaultInput();
 	}
+
+	public static void enableQuitOnPause() {
+		final MainActivity mainActivity = IOuyaActivity.GetMainActivity();
+		if (null == mainActivity) {
+			Log.e(TAG, "useDefaultInput: MainActivity is null!");
+			return;
+		}
+		mainActivity.enableQuitOnPause();
+	}
 }

@@ -17,6 +17,7 @@
 package tv.ouya.sdk;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.*;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
@@ -24,10 +25,12 @@ import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Process;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -45,7 +48,7 @@ public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
 
-	private static final String PLUGIN_VERSION = "2.1.0.8";
+	private static final String PLUGIN_VERSION = "2.1.0.9";
 
     private static final int TURRET_MOUSE_BUTTON_INDEX = 0;
 
@@ -68,6 +71,8 @@ public class MainActivity extends Activity
     private static int sDisplayWidth = 1920;
 
     private static int sDisplayHeight = 1080;
+
+	private boolean mEnableQuitOnPause = false;
 
     TurretMouseService.mouseReceiver mMouseReceiver = new TurretMouseService.mouseReceiver() {
         @Override
@@ -319,6 +324,34 @@ public class MainActivity extends Activity
             unbindService(mMouseConnection);
             mMouseServiceBound = false;
         }
+
+        if (mEnableQuitOnPause) {
+			if (sEnableLogging) {
+				Log.d(TAG, "onPause: mEnableQuitOnPause=true");
+			}
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Sorry, this game does not support pausing.");
+			builder.setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					Process.killProcess(Process.myPid());
+				}
+			});
+			final AlertDialog dialog = builder.create();
+			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+				@Override
+				public void onShow(DialogInterface dialogInterface) {
+					dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(View.INVISIBLE);
+				}
+			});
+			dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialogInterface) {
+					Process.killProcess(Process.myPid());
+				}
+			});
+            dialog.show();
+		}
 	}
 
 	// Resume Unity
@@ -545,5 +578,13 @@ public class MainActivity extends Activity
 		takeKeyEvents(false);
 		mUnityPlayer.setFocusable(true);
 		mUnityPlayer.requestFocus();
+	}
+
+	public void enableQuitOnPause()
+	{
+		if (sEnableLogging) {
+			Log.d(TAG, "enableQuitOnPause:");
+		}
+		mEnableQuitOnPause = true;
 	}
 }

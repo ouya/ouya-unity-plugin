@@ -34,7 +34,7 @@ using UnityEngine;
 
 public static class OuyaSDK
 {
-    public const string PLUGIN_VERSION = "2.1.0.8";
+    public const string PLUGIN_VERSION = "2.1.0.9";
 
 #if UNITY_ANDROID && !UNITY_EDITOR
 
@@ -764,6 +764,15 @@ public static class OuyaSDK
         OuyaInput.ClearButtonStates();
         OuyaInput.UpdateInputFrame();
         s_useDefaultInput = true;
+    }
+
+    public static void enableQuitOnPause()
+    {
+        if (!isIAPInitComplete())
+        {
+            return;
+        }
+        OuyaUnityPlugin.enableQuitOnPause();
     }
 
 #endif

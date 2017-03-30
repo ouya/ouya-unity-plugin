@@ -1,4 +1,4 @@
-SET JDK7=c:\Program Files\Java\jdk1.7.0_79
+SET JDK7=c:\Program Files (x86)\Java\jdk1.8.0_112
 SET JAR=%JDK7%\bin\jar.exe
 COPY /Y java\build\outputs\aar\java-release.aar ..\OuyaUnityPlugin.aar
 CD ..\
