@@ -684,9 +684,18 @@ public class OuyaUnityPlugin
 	public static void enableQuitOnPause() {
 		final MainActivity mainActivity = IOuyaActivity.GetMainActivity();
 		if (null == mainActivity) {
-			Log.e(TAG, "useDefaultInput: MainActivity is null!");
+			Log.e(TAG, "enableQuitOnPause: MainActivity is null!");
 			return;
 		}
 		mainActivity.enableQuitOnPause();
 	}
+
+    public static void enableGenericAsTurretMouse() {
+        final MainActivity mainActivity = IOuyaActivity.GetMainActivity();
+        if (null == mainActivity) {
+            Log.e(TAG, "enableGenericAsTurretMouse: MainActivity is null!");
+            return;
+        }
+        mainActivity.enableGenericAsTurretMouse();
+    }
 }

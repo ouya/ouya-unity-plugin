@@ -34,7 +34,7 @@ using UnityEngine;
 
 public static class OuyaSDK
 {
-    public const string PLUGIN_VERSION = "2.1.0.10";
+    public const string PLUGIN_VERSION = "2.1.0.11";
 
 #if UNITY_ANDROID && !UNITY_EDITOR
 
@@ -773,6 +773,15 @@ public static class OuyaSDK
             return;
         }
         OuyaUnityPlugin.enableQuitOnPause();
+    }
+
+    public static void enableGenericAsTurretMouse()
+    {
+        if (!isIAPInitComplete())
+        {
+            return;
+        }
+        OuyaUnityPlugin.enableGenericAsTurretMouse();
     }
 
 #endif

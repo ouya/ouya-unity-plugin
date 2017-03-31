@@ -34,13 +34,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-
 import com.razerzone.turretmouse.TurretMouseService;
 import com.unity3d.player.UnityPlayer;
-
 import java.io.InputStream;
 import java.io.IOException;
-
 import tv.ouya.console.api.OuyaController;
 import tv.ouya.console.api.OuyaIntent;
 
@@ -48,9 +45,11 @@ public class MainActivity extends Activity
 {
 	private static final String TAG = "MainActivity";
 
-	private static final String PLUGIN_VERSION = "2.1.0.10";
+	private static final String PLUGIN_VERSION = "2.1.0.11";
 
     private static final int TURRET_MOUSE_BUTTON_INDEX = 0;
+
+    private static final int TURRET_MOUSE_X_INDEX = 4;
 
     private static final int TURRET_MOUSE_Y_INDEX = 5;
 
@@ -75,6 +74,8 @@ public class MainActivity extends Activity
 	private boolean mEnableQuitOnPause = false;
 
     private boolean mQuitAlertShown = false;
+
+    private boolean mEnableGenericAsTurretMouse = false;
 
     TurretMouseService.mouseReceiver mMouseReceiver = new TurretMouseService.mouseReceiver() {
         @Override
@@ -430,8 +431,35 @@ public class MainActivity extends Activity
 	@Override
     public boolean dispatchGenericMotionEvent(MotionEvent motionEvent) {
     	if (sEnableLogging) {
-            Log.d(TAG, "dispatchGenericMotionEvent");
+            Log.d(TAG, "dispatchGenericMotionEvent:");
 		}
+        if (mEnableGenericAsTurretMouse) {
+            int buttonState = motionEvent.getButtonState();
+            boolean leftButton = (buttonState & 1) == 1;
+            boolean rightButton = (buttonState & 2) == 2;
+            boolean middleButton = (buttonState & 4) == 4;
+            int x = (int)motionEvent.getX();
+            int y = (int)motionEvent.getY();
+            int z = (int)motionEvent.getAxisValue(MotionEvent.AXIS_VSCROLL);
+            int invertY = sDisplayHeight - y;
+            if (sEnableLogging) {
+                Log.d(TAG, "dispatchGenericMotionEvent: leftButton="+leftButton+" rightButton="+rightButton+" middleButton="+middleButton+" buttonState="+buttonState+" x="+x+" y="+invertY+" z="+z);
+            }
+            int mask = 0;
+            if (leftButton) {
+                mask |= TurretMouseService.BUTTON_LEFT;
+            }
+            if (rightButton) {
+                mask |= TurretMouseService.BUTTON_RIGHT;
+            }
+            if (middleButton) {
+                mask |= TurretMouseService.BUTTON_MIDDLE;
+            }
+            setTurretMouseInfoNative(0, mask);
+            setTurretMouseInfoNative(TURRET_MOUSE_X_INDEX, x);
+            setTurretMouseInfoNative(TURRET_MOUSE_Y_INDEX, invertY);
+            setTurretMouseInfoNative(TURRET_MOUSE_Z_INDEX, z);
+        }
 		if (null == mInputView) {
 			return super.dispatchGenericMotionEvent(motionEvent);
 		} else {
@@ -533,7 +561,7 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onGenericMotionEvent(MotionEvent motionEvent) {
     	if (sEnableLogging) {
-            Log.d(TAG, "onGenericMotionEvent");
+            Log.d(TAG, "onGenericMotionEvent:");
 		}
 		if (null == mInputView) {
 			return super.onGenericMotionEvent(motionEvent);
@@ -625,4 +653,11 @@ public class MainActivity extends Activity
 		}
 		mEnableQuitOnPause = true;
 	}
+
+	public void enableGenericAsTurretMouse() {
+        if (sEnableLogging) {
+            Log.d(TAG, "enableGenericAsTurretMouse:");
+        }
+        mEnableGenericAsTurretMouse = true;
+    }
 }
