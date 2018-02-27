@@ -40,8 +40,10 @@ public class OuyaPlotMeshThumbstick : MonoBehaviour
 
     private static List<OuyaPlotMeshThumbstick> m_plots = new List<OuyaPlotMeshThumbstick>();
 
+#pragma warning disable CS0414 //
     private int m_lastX = -2;
     private int m_lastY = -2;
+#pragma warning restore CS0414 //
 
     public string m_label = null;
 
@@ -138,7 +140,9 @@ public class OuyaPlotMeshThumbstick : MonoBehaviour
         }
     }
 
+#pragma warning disable CS0414 //
     private float m_increment = 1/32f;
+#pragma warning restore CS0414 //
 
     void UpdateTexture()
     {

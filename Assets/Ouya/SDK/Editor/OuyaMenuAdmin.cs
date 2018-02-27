@@ -156,6 +156,7 @@ public class OuyaMenuAdmin : MonoBehaviour
         }
     }
 
+#pragma warning disable CS0414 //
     private static string m_pathUnityProject = string.Empty;
     private static string m_pathUnityEditor = string.Empty;
     private static string m_pathUnityJar = string.Empty;
@@ -165,6 +166,7 @@ public class OuyaMenuAdmin : MonoBehaviour
     private static string m_pathJavaC = string.Empty;
     private static string m_pathJavaP = string.Empty;
     private static string m_pathSDK = string.Empty;
+#pragma warning restore CS0414 //
 
     private static void UpdatePaths()
     {
