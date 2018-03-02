@@ -6,4 +6,4 @@ This version of the OUYA Plugin required [JDK 8](http://www.oracle.com/technetwo
 
 Includes support for `Turret Mouse` on `Forge TV`.
 
-Unity: 5.4.1f1
+Unity: 2017.1.2f1
