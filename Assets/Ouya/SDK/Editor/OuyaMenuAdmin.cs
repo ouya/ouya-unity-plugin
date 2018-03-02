@@ -50,6 +50,7 @@ public class OuyaMenuAdmin : MonoBehaviour
                 "Assets/Plugins/OuyaSDK.cs",
                 "Assets/Plugins/OuyaUnityActivity.cs",
                 "Assets/Plugins/OuyaUnityPlugin.cs",
+                "Assets/Plugins/RazerTurretKeyboard.cs",
                 "Assets/Plugins/UnityPlayer.cs",
                 "Assets/Plugins/Android/AndroidManifest.xml",
                 "Assets/Plugins/Android/assets/key.der",
