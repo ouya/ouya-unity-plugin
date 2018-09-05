@@ -36,8 +36,10 @@ public class OuyaPlotAxisButton : MonoBehaviour
 
     private int m_timeIndex = 0;
 
+#pragma warning disable CS0414 //
     private List<int> m_plotAxises = new List<int>();
     private List<int> m_plotButtons = new List<int>();
+#pragma warning restore CS0414 //
 
     public void OnEnable()
     {

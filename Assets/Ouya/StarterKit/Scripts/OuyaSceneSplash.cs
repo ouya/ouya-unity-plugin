@@ -61,7 +61,7 @@ public class OuyaSceneSplash : MonoBehaviour
 
         if (m_timerOut < DateTime.Now)
         {
-            Application.LoadLevel(NextScene);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(NextScene);
             return;
         }
 

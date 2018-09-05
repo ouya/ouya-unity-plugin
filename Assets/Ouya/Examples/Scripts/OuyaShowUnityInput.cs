@@ -39,8 +39,10 @@ public class OuyaShowUnityInput : MonoBehaviour
 {
     public static int PlayerNum = 0;
 
+#pragma warning disable CS0414 //
     private GUISkin m_guiSkin = null;
     private Texture2D m_backgroundBlack = null;
+#pragma warning restore CS0414 //
 
     #region Model reference fields
 
@@ -63,6 +65,7 @@ public class OuyaShowUnityInput : MonoBehaviour
 
     #endregion
 
+#pragma warning disable CS0414 //
     private string m_axis1 = string.Empty;
     private string m_axis2 = string.Empty;
     private string m_axis3 = string.Empty;
@@ -92,6 +95,7 @@ public class OuyaShowUnityInput : MonoBehaviour
     private string m_controller6 = string.Empty;
     private string m_controller7 = string.Empty;
     private string m_controller8 = string.Empty;
+#pragma warning restore CS0414 //
 
     #region Thumbstick plots
 
@@ -99,7 +103,9 @@ public class OuyaShowUnityInput : MonoBehaviour
 
     #endregion
 
+#pragma warning disable CS0414 //
     private DateTime m_menuDetected = DateTime.MinValue;
+#pragma warning restore CS0414 //
 
     public void OuyaMenuAppearing()
     {

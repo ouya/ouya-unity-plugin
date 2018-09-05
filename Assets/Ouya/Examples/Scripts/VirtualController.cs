@@ -47,7 +47,9 @@ public class VirtualController : MonoBehaviour
 
     public int _PlayerNumber = 0; // controller #1
 
+#pragma warning disable CS0414 //
     private DateTime _timerMenu = DateTime.MinValue;
+#pragma warning restore CS0414 //
 
     private const float AXIS_SCALER = 0.05f;
 
