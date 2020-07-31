@@ -1,6 +1,6 @@
 # ouya-unity-plugin
 
-OUYA Plugin for Unity
+OUYA Plugin for Unity - Contains Android Studio Files to build OuyaUnityPlugin.arr
 
 This version of the OUYA Plugin required [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and `Android API 21` or better.
 
