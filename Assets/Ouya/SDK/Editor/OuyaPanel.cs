@@ -102,7 +102,7 @@ public class OuyaPanel : EditorWindow
 
     public static string GetBundleId()
     {
-        return PlayerSettings.bundleIdentifier;
+        return PlayerSettings.applicationIdentifier;
     }
 
     #endregion
@@ -525,7 +525,7 @@ public class OuyaPanel : EditorWindow
             {
                 //Debug.Log(appPath);
                 //Debug.Log(pathADB);
-                string args = string.Format("shell am start -n {0}/tv.ouya.sdk.MainActivity", PlayerSettings.bundleIdentifier);
+                string args = string.Format("shell am start -n {0}/tv.ouya.sdk.MainActivity", PlayerSettings.applicationIdentifier);
                 //Debug.Log(args);
                 ProcessStartInfo ps = new ProcessStartInfo(pathADB, args);
                 Process p = new Process();
@@ -547,7 +547,7 @@ public class OuyaPanel : EditorWindow
             {
                 //Debug.Log(appPath);
                 //Debug.Log(pathADB);
-                string args = string.Format("shell am force-stop {0}", PlayerSettings.bundleIdentifier);
+                string args = string.Format("shell am force-stop {0}", PlayerSettings.applicationIdentifier);
                 //Debug.Log(args);
                 ProcessStartInfo ps = new ProcessStartInfo(pathADB, args);
                 Process p = new Process();
@@ -832,7 +832,7 @@ public class OuyaPanel : EditorWindow
 		apkName = string.Format ("{0}.apk", productName);
 		EditorPrefs.SetString(KEY_APK_NAME, apkName);
 
-        PlayerSettings.bundleIdentifier = string.Format("tv.ouya.demo.{0}", productName);
+        PlayerSettings.applicationIdentifier = string.Format("tv.ouya.demo.{0}", productName);
         PlayerSettings.productName = productName;
     }
 
@@ -956,12 +956,12 @@ public class OuyaPanel : EditorWindow
                 PlayerSettings.productName = GUILayout.TextField(PlayerSettings.productName, EditorStyles.wordWrappedLabel, GUILayout.MaxWidth(position.width - 130));
                 GUILayout.EndHorizontal();
 
-                if ((PlayerSettings.bundleIdentifier.Contains(" ") ||
-                    PlayerSettings.bundleIdentifier.Contains("\t") ||
-                    PlayerSettings.bundleIdentifier.Contains("\r") ||
-                    PlayerSettings.bundleIdentifier.Contains("\n") ||
-                    PlayerSettings.bundleIdentifier.Contains("(") ||
-                    PlayerSettings.bundleIdentifier.Contains(")")))
+                if ((PlayerSettings.applicationIdentifier.Contains(" ") ||
+                    PlayerSettings.applicationIdentifier.Contains("\t") ||
+                    PlayerSettings.applicationIdentifier.Contains("\r") ||
+                    PlayerSettings.applicationIdentifier.Contains("\n") ||
+                    PlayerSettings.applicationIdentifier.Contains("(") ||
+                    PlayerSettings.applicationIdentifier.Contains(")")))
                 {
                     String fieldError = "[error] (bundle id has an invalid character)\n";
                     if (string.IsNullOrEmpty(error))
@@ -976,7 +976,7 @@ public class OuyaPanel : EditorWindow
                 GUILayout.Space(25);
                 GUILayout.Label("Bundle Identifier", GUILayout.Width(100));
                 GUILayout.Space(5);
-                PlayerSettings.bundleIdentifier = GUILayout.TextField(PlayerSettings.bundleIdentifier, EditorStyles.wordWrappedLabel, GUILayout.MaxWidth(position.width - 130));
+                PlayerSettings.applicationIdentifier = GUILayout.TextField(PlayerSettings.applicationIdentifier, EditorStyles.wordWrappedLabel, GUILayout.MaxWidth(position.width - 130));
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal(GUILayout.MaxWidth(position.width));
