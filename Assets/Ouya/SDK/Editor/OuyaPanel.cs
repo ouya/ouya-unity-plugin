@@ -847,14 +847,11 @@ public class OuyaPanel : EditorWindow
             "SceneCommunityContent",
             "SceneDefaultInput",
             "SceneSafeArea",
-            "SceneShowJavaScript",
             "SceneShowProducts",
-            "SceneShowSounds",
             "SceneShowSticks",
             "SceneShowUnityInput",
 			"SceneShowUGUI",
             "VirtualController",
-			"VirtualControllerJS",
         };
 
     private static int m_selectedAdbMode = 0;
@@ -868,7 +865,6 @@ public class OuyaPanel : EditorWindow
     void OnGUI()
     {
         GUI.enabled = !EditorApplication.isCompiling;
-
 
         m_scroll = GUILayout.BeginScrollView(m_scroll, GUILayout.MaxWidth(position.width));
 
@@ -1018,27 +1014,17 @@ public class OuyaPanel : EditorWindow
                 GUIDisplayUnityFile("key.der", "Assets/Plugins/Android/assets/key.der");
                 GUIDisplayFolder("Res", pathRes);
 
-                if (GUILayout.Button("Check for plugin updates"))
-                {
-                    Application.OpenURL("https://github.com/ouya/ouya-unity-plugin");
-                }
+				if (GUILayout.Button("Check for plugin updates"))
+				{
+					Application.OpenURL("https://github.com/Goest-Games/ouya-unity-plugin");
+				}
 
-                if (GUILayout.Button("Visit Unity3d on OUYA Forum"))
-                {
-                    Application.OpenURL("http://forums.ouya.tv/categories/unity-on-ouya");
-                }
+				if (GUILayout.Button("OUYA WORLD Developer Forum"))
+				{
+					Application.OpenURL("https://ouya.world/c/developers");
+				}
 
-                if (GUILayout.Button("Read OUYA Unity Docs"))
-                {
-                    Application.OpenURL("https://devs.ouya.tv/developers/docs/unity");
-                }
-
-                if (GUILayout.Button("OUYA Developer Portal"))
-                {
-                    Application.OpenURL("https://devs.ouya.tv/developers");
-                }
-
-                break;
+				break;
             case 1:
                 GUILayout.Label("Unity Paths", EditorStyles.boldLabel);
 
@@ -1053,13 +1039,13 @@ public class OuyaPanel : EditorWindow
 
                 if (GUILayout.Button("Unity3d Training"))
                 {
-                    Application.OpenURL("http://unity3d.com/learn");
-                }
+					Application.OpenURL("https://learn.unity.com/");
+				}
 
                 if (GUILayout.Button("Unity3d Scripting Reference"))
                 {
-                    Application.OpenURL("http://docs.unity3d.com/Documentation/ScriptReference/index.html");
-                }
+					Application.OpenURL("https://docs.unity3d.com/2019.2/Documentation/ScriptReference/index.html");
+				}
 
                 break;
             case 2:
