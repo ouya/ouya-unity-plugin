@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Buttons_OUYA
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 5e7c358f0ddd3534cbf4bae1f26c4b8b, type: 3}
+    - {fileID: 2800000, guid: daf516f55bd8c4147ac575166ebf346a, type: 3}
+    - {fileID: 2800000, guid: cdac1fe09dbdb464395f742668db1326, type: 3}
+    - {fileID: 2800000, guid: d34dc34bc3144314996cb01f1370db81, type: 3}
+    - {fileID: 2800000, guid: 0dbf12f00c9814840a45e9c0d6272804, type: 3}
+    - {fileID: 2800000, guid: 509f4c0a8a6211b4592a6a7a72b8d0cb, type: 3}
+    - {fileID: 2800000, guid: 15eb2dc1542f9ac4f850159081824018, type: 3}
+    - {fileID: 2800000, guid: 0d8cd928fa05fd44a9ca2afcd1733c8e, type: 3}
+    - {fileID: 2800000, guid: 3b4b16387acc7654f891e41ac5e471fd, type: 3}
+    - {fileID: 2800000, guid: f2f82afcc29d200429b8b6c68370a7b4, type: 3}
+    - {fileID: 2800000, guid: de8e896016dd48c4898db4c93d508608, type: 3}
+    - {fileID: 2800000, guid: 97f47c070535f1343aee329d4fdc3aae, type: 3}
+    - {fileID: 2800000, guid: 0dc548dd183cc564fbb14b0238b76800, type: 3}
+    - {fileID: 2800000, guid: 2a52c5fd008d5fc4f81cc8c2584681db, type: 3}
+    - {fileID: 2800000, guid: c7f97ecadc4d53c4c91f98bbbdfbb985, type: 3}
+    - {fileID: 2800000, guid: 7d6646e9978489542bd1ef85df1e6dc1, type: 3}
+    - {fileID: 2800000, guid: b25feab75eb2084428d1bc90313b87a1, type: 3}
+    - {fileID: 2800000, guid: 9dbce4e246c176047a7a2cf61325498c, type: 3}
+    - {fileID: 2800000, guid: c6a0a405d12cb2d4d8de4f1a9eac73d6, type: 3}
+    - {fileID: 2800000, guid: 1ec680907d4dd214a91a6c42d980a948, type: 3}
+    - {fileID: 2800000, guid: 9c0f8f2b4a2299e41b1ea58cb0445423, type: 3}
+    - {fileID: 2800000, guid: 42c6163768ad4324ca6c018bb0ae9674, type: 3}
+    - {fileID: 2800000, guid: 65f1ec6d89a7e8c458f5b8a27938ba74, type: 3}
+    - {fileID: 2800000, guid: 793447a49bb2a1145b609d6b835f5215, type: 3}
+    - {fileID: 2800000, guid: a311017733677c3478dcc8e116d2ef55, type: 3}
+    - {fileID: 2800000, guid: 01ec003146176e149baf2121e818e9dc, type: 3}
+    - {fileID: 2800000, guid: 98ec3476c2bd02840840d8f55a303d67, type: 3}
+    totalSpriteSurfaceArea: 603772
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: de8e896016dd48c4898db4c93d508608, type: 3}
+  - {fileID: 21300000, guid: 1ec680907d4dd214a91a6c42d980a948, type: 3}
+  - {fileID: 21300000, guid: cdac1fe09dbdb464395f742668db1326, type: 3}
+  - {fileID: 21300000, guid: 0dbf12f00c9814840a45e9c0d6272804, type: 3}
+  - {fileID: 21300000, guid: 01ec003146176e149baf2121e818e9dc, type: 3}
+  - {fileID: 21300000, guid: 15eb2dc1542f9ac4f850159081824018, type: 3}
+  - {fileID: 21300000, guid: 9dbce4e246c176047a7a2cf61325498c, type: 3}
+  - {fileID: 21300000, guid: 793447a49bb2a1145b609d6b835f5215, type: 3}
+  - {fileID: 21300000, guid: c6a0a405d12cb2d4d8de4f1a9eac73d6, type: 3}
+  - {fileID: 21300000, guid: daf516f55bd8c4147ac575166ebf346a, type: 3}
+  - {fileID: 21300000, guid: 98ec3476c2bd02840840d8f55a303d67, type: 3}
+  - {fileID: 21300000, guid: 97f47c070535f1343aee329d4fdc3aae, type: 3}
+  - {fileID: 21300000, guid: 42c6163768ad4324ca6c018bb0ae9674, type: 3}
+  - {fileID: 21300000, guid: a311017733677c3478dcc8e116d2ef55, type: 3}
+  - {fileID: 21300000, guid: b25feab75eb2084428d1bc90313b87a1, type: 3}
+  - {fileID: 21300000, guid: 0d8cd928fa05fd44a9ca2afcd1733c8e, type: 3}
+  - {fileID: 21300000, guid: 3b4b16387acc7654f891e41ac5e471fd, type: 3}
+  - {fileID: 21300000, guid: 7d6646e9978489542bd1ef85df1e6dc1, type: 3}
+  - {fileID: 21300000, guid: 509f4c0a8a6211b4592a6a7a72b8d0cb, type: 3}
+  - {fileID: 21300000, guid: c7f97ecadc4d53c4c91f98bbbdfbb985, type: 3}
+  - {fileID: 21300000, guid: 9c0f8f2b4a2299e41b1ea58cb0445423, type: 3}
+  - {fileID: 21300000, guid: d34dc34bc3144314996cb01f1370db81, type: 3}
+  - {fileID: 21300000, guid: f2f82afcc29d200429b8b6c68370a7b4, type: 3}
+  - {fileID: 21300000, guid: 65f1ec6d89a7e8c458f5b8a27938ba74, type: 3}
+  - {fileID: 21300000, guid: 0dc548dd183cc564fbb14b0238b76800, type: 3}
+  - {fileID: 21300000, guid: 2a52c5fd008d5fc4f81cc8c2584681db, type: 3}
+  - {fileID: 21300000, guid: 5e7c358f0ddd3534cbf4bae1f26c4b8b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - OUYA_LS_LEFT
+  - OUYA_RS_RIGHT
+  - OUYA_DPAD_LEFT
+  - OUYA_DPAD_UP
+  - OUYA_Y
+  - OUYA_L2
+  - OUYA_RS_DOWN
+  - OUYA_O
+  - OUYA_RS_LEFT
+  - OUYA_DPAD_DOWN
+  - OUYA_A
+  - OUYA_LS_RIGHT
+  - OUYA_SYSTEM
+  - OUYA_U
+  - OUYA_RS
+  - OUYA_L3
+  - OUYA_LS
+  - OUYA_R3
+  - OUYA_L1
+  - OUYA_R2
+  - OUYA_RS_UP
+  - OUYA_DPAD_RIGHT
+  - OUYA_LS_DOWN
+  - OUYA_TOUCHPAD
+  - OUYA_LS_UP
+  - OUYA_R1
+  - OUYA_DPAD
+  m_Tag: Buttons_OUYA
+  m_IsVariant: 0
