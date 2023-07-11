@@ -8,3 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ouya/Examples/Scenes/SceneShowUnityInput.unity
     guid: 2f8b058e37870744da57754bebe01810
+  - enabled: 1
+    path: Assets/InControl/Test/TestInputManager.unity
+    guid: 5732134fbcf2c404ea75451f03d6392e
+  m_configObjects: {}
