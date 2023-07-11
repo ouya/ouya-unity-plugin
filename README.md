@@ -7,6 +7,6 @@ This version of the OUYA Plugin required `[JDK 8]` or `[OpenJDK]` and `Android A
 Includes support for `Turret Mouse` on `Forge TV`.
 
 `InControl` was included to facilitate the implementation of controls
-Note: it is an `old` and `limited` version to only be used in `OUYA`.
+Note: It is the open source version: https://github.com/pbhogan/InControl.git
 
 Unity: 2019.2.21f1 only
