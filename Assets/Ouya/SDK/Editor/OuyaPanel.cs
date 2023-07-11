@@ -78,7 +78,7 @@ public class OuyaPanel : EditorWindow
     public const string KEY_PATH_OUYA_SDK = @"OUYA SDK";
     public const string KEY_PATH_JAR_GUAVA = @"Guava Jar";
     public const string KEY_PATH_JAR_GSON = @"GSON Jar";
-    public const string KEY_PATH_JAR_OUYA_UNITY_PLUGIN = @"OUYA Plugin Jar";
+    public const string KEY_PATH_JAR_OUYA_UNITY_PLUGIN = @"OUYA Plugin";
     public const string KEY_APK_NAME = @"OuyaJavaApkName";
 
     private static string pathOuyaSDKJar = string.Empty;
@@ -92,7 +92,7 @@ public class OuyaPanel : EditorWindow
     void UpdateOuyaPaths()
     {
         pathOuyaSDKJar = string.Format("{0}/Assets/Plugins/Android/libs/ouya-sdk.jar", pathUnityProject);
-        pathOuyaUnityPluginJar = string.Format("{0}/Assets/Plugins/Android/libs/OuyaUnityPlugin.jar", pathUnityProject);
+        pathOuyaUnityPluginJar = string.Format("{0}/Assets/Plugins/Android/libs/OuyaUnityPlugin.aar", pathUnityProject);
 
         pathManifestPath = string.Format("{0}/Assets/Plugins/Android/AndroidManifest.xml", pathUnityProject);
         pathRes = string.Format("{0}/Assets/Plugins/Android/res", pathUnityProject);
@@ -124,9 +124,10 @@ public class OuyaPanel : EditorWindow
     public static string pathAAPT = string.Empty;
     public static string pathSDK = string.Empty;
 
-#pragma warning disable CS0414 //
+
+#pragma warning disable CS0414 // Quitar miembros privados no utilizados
     private string m_browserUrl = "https://devs.ouya.tv/developers/docs/unity";
-#pragma warning restore CS0414 //
+#pragma warning restore CS0414 // Quitar miembros privados no utilizados
 
     static string GetPathAndroidJar()
     {
@@ -320,8 +321,8 @@ public class OuyaPanel : EditorWindow
     public const string KEY_PATH_UNITY_PROJECT = @"Unity Project";
 
     public const string FILE_UNITY_JAR = "classes.jar";
-    public const string PATH_UNITY_JAR_WIN = "Data/PlaybackEngines/androidplayer";
-    
+    public const string PATH_UNITY_JAR_WIN = "Data/PlaybackEngines/androidplayer/Variations";
+
     private static string pathUnityJar = string.Empty;
     private static string pathUnityEditor = string.Empty;
     private static string pathUnityProject = string.Empty;
@@ -331,11 +332,29 @@ public class OuyaPanel : EditorWindow
         switch (Application.platform)
         {
             case RuntimePlatform.OSXEditor:
-				FindFile(new DirectoryInfo(string.Format("{0}", EditorApplication.applicationPath)), FILE_UNITY_JAR, ref pathUnityJar);
-				pathUnityJar = pathUnityJar.Replace(@"\", "/");
+                FindFile(new DirectoryInfo(string.Format("{0}", EditorApplication.applicationPath)), FILE_UNITY_JAR, ref pathUnityJar);
+                pathUnityJar = pathUnityJar.Replace(@"\", "/");
                 break;
             case RuntimePlatform.WindowsEditor:
-                FindFile(new DirectoryInfo(string.Format("{0}/{1}", pathUnityEditor, PATH_UNITY_JAR_WIN)), FILE_UNITY_JAR, ref pathUnityJar);
+                switch (PlayerSettings.GetScriptingBackend(BuildTargetGroup.Android))
+                {
+                    case ScriptingImplementation.Mono2x:
+                        FindFile(new DirectoryInfo(string.Format("{0}/{1}", pathUnityEditor, PATH_UNITY_JAR_WIN + "/mono/Release/Classes")), FILE_UNITY_JAR, ref pathUnityJar); break;
+                    case ScriptingImplementation.IL2CPP:
+                        switch (PlayerSettings.GetIl2CppCompilerConfiguration(BuildTargetGroup.Android))
+                        {
+                            case Il2CppCompilerConfiguration.Debug:
+                                FindFile(new DirectoryInfo(string.Format("{0}/{1}", pathUnityEditor, PATH_UNITY_JAR_WIN + "/il2cpp/Development/Classes")), FILE_UNITY_JAR, ref pathUnityJar);
+                                break;
+                            case Il2CppCompilerConfiguration.Release:
+                                FindFile(new DirectoryInfo(string.Format("{0}/{1}", pathUnityEditor, PATH_UNITY_JAR_WIN + "/il2cpp/Release/Classes")), FILE_UNITY_JAR, ref pathUnityJar);
+                                break;
+                            case Il2CppCompilerConfiguration.Master:
+                                FindFile(new DirectoryInfo(string.Format("{0}/{1}", pathUnityEditor, PATH_UNITY_JAR_WIN + "/il2cpp/Release/Classes")), FILE_UNITY_JAR, ref pathUnityJar);
+                                break;
+                        }
+                        break;
+                }
                 break;
         }
     }
@@ -502,6 +521,7 @@ public class OuyaPanel : EditorWindow
 
         if (!string.IsNullOrEmpty(m_nextScene))
         {
+            //EditorApplication.OpenScene(m_nextScene);
             UnityEditor.SceneManagement.EditorSceneManager.OpenScene(m_nextScene);
             m_nextScene = string.Empty;
             return;
@@ -605,13 +625,13 @@ public class OuyaPanel : EditorWindow
             m_toggleOpenAndroidSDK = false;
 
             string androidPath = string.Empty;
-            
+
             switch (Application.platform)
             {
                 case RuntimePlatform.OSXEditor:
                     androidPath = string.Format("{0}/tools/android", pathSDK);
                     break;
-                
+
                 case RuntimePlatform.WindowsEditor:
                     androidPath = string.Format("{0}/tools/android.bat", pathSDK);
                     break;
@@ -741,8 +761,8 @@ public class OuyaPanel : EditorWindow
                 EditorGUILayout.LabelField(title);
                 found = true;
             }
-             
-            EditorGUILayout.LabelField(string.Format("[{1}] - {0}",texture2D.ToString(), textureSizes[i]));
+
+            EditorGUILayout.LabelField(string.Format("[{1}] - {0}", texture2D.ToString(), textureSizes[i]));
             new GUIContent(texture2D);
             Rect pos = GUILayoutUtility.GetRect(textureSizes[i], textureSizes[i], EditorStyles.miniButton, GUILayout.ExpandWidth(false));
             EditorGUI.DrawPreviewTexture(pos, texture2D);
@@ -774,9 +794,9 @@ public class OuyaPanel : EditorWindow
             "Assets/Plugins/Android/res/drawable/app_icon.png",
             true);
 
-		File.Copy(string.Format("Assets/Ouya/Examples/Icons/{0}/icon.png", sceneName),
-			"Assets/Plugins/Android/res/drawable/icon.png",
-			true);
+        File.Copy(string.Format("Assets/Ouya/Examples/Icons/{0}/icon.png", sceneName),
+            "Assets/Plugins/Android/res/drawable/icon.png",
+            true);
 
         File.Copy(string.Format("Assets/Ouya/Examples/Icons/{0}/ouya_icon.png", sceneName),
             @"Assets/Plugins/Android/res/drawable-xhdpi/ouya_icon.png",
@@ -799,9 +819,9 @@ public class OuyaPanel : EditorWindow
             "Assets/Plugins/Android/res/drawable/app_icon.png",
             true);
 
-		File.Copy("Assets/Ouya/StarterKit/Icons/icon.png",
-		          "Assets/Plugins/Android/res/drawable/icon.png",
-		          true);
+        File.Copy("Assets/Ouya/StarterKit/Icons/icon.png",
+                  "Assets/Plugins/Android/res/drawable/icon.png",
+                  true);
 
         File.Copy("Assets/Ouya/StarterKit/Icons/ouya_icon.png",
             @"Assets/Plugins/Android/res/drawable-xhdpi/ouya_icon.png",
@@ -817,9 +837,9 @@ public class OuyaPanel : EditorWindow
             "Assets/Plugins/Android/res/drawable/app_icon.png",
             true);
 
-		File.Copy("Assets/Ouya/Examples/Icons/OuyaEverywhere/icon.png",
-		          "Assets/Plugins/Android/res/drawable/icon.png",
-		          true);
+        File.Copy("Assets/Ouya/Examples/Icons/OuyaEverywhere/icon.png",
+                  "Assets/Plugins/Android/res/drawable/icon.png",
+                  true);
 
         File.Copy("Assets/Ouya/Examples/Icons/OuyaEverywhere//ouya_icon.png",
             @"Assets/Plugins/Android/res/drawable-xhdpi/ouya_icon.png",
@@ -830,9 +850,9 @@ public class OuyaPanel : EditorWindow
     {
         EditorBuildSettings.scenes = scenes;
         m_nextScene = scenes[0].path;
-		
-		apkName = string.Format ("{0}.apk", productName);
-		EditorPrefs.SetString(KEY_APK_NAME, apkName);
+
+        apkName = string.Format("{0}.apk", productName);
+        EditorPrefs.SetString(KEY_APK_NAME, apkName);
 
         PlayerSettings.applicationIdentifier = string.Format("tv.ouya.demo.{0}", productName);
         PlayerSettings.productName = productName;
@@ -852,19 +872,19 @@ public class OuyaPanel : EditorWindow
             "SceneShowProducts",
             "SceneShowSticks",
             "SceneShowUnityInput",
-			"SceneShowUGUI",
+            "SceneShowUGUI",
             "VirtualController",
         };
 
-#pragma warning disable CS0414 //
+#pragma warning disable CS0414 // Agregar modificador de solo lectura
     private static int m_selectedAdbMode = 0;
+#pragma warning restore CS0414 // Agregar modificador de solo lectura
 
     private static string[] m_abdModes =
         {
             "wired",
             "wireless",
         };
-#pragma warning restore CS0414 //
 
     void OnGUI()
     {
@@ -976,7 +996,8 @@ public class OuyaPanel : EditorWindow
                 GUILayout.Space(25);
                 GUILayout.Label("Bundle Identifier", GUILayout.Width(100));
                 GUILayout.Space(5);
-                PlayerSettings.applicationIdentifier = GUILayout.TextField(PlayerSettings.applicationIdentifier, EditorStyles.wordWrappedLabel, GUILayout.MaxWidth(position.width - 130));
+                //PlayerSettings.applicationIdentifier = GUILayout.TextField(PlayerSettings.applicationIdentifier, EditorStyles.wordWrappedLabel, GUILayout.MaxWidth(position.width - 130));
+                PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, GUILayout.TextField(PlayerSettings.applicationIdentifier, EditorStyles.wordWrappedLabel, GUILayout.MaxWidth(position.width - 130)));
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal(GUILayout.MaxWidth(position.width));
@@ -1018,17 +1039,17 @@ public class OuyaPanel : EditorWindow
                 GUIDisplayUnityFile("key.der", "Assets/Plugins/Android/assets/key.der");
                 GUIDisplayFolder("Res", pathRes);
 
-				if (GUILayout.Button("Check for plugin updates"))
-				{
-					Application.OpenURL("https://github.com/Goest-Games/ouya-unity-plugin");
-				}
+                if (GUILayout.Button("Check for plugin updates"))
+                {
+                    Application.OpenURL("https://github.com/Goest-Games/ouya-unity-plugin");
+                }
 
-				if (GUILayout.Button("OUYA WORLD Developer Forum"))
-				{
-					Application.OpenURL("https://ouya.world/c/developers");
-				}
+                if (GUILayout.Button("OUYA WORLD Developer Forum"))
+                {
+                    Application.OpenURL("https://ouya.world/c/developers");
+                }
 
-				break;
+                break;
             case 1:
                 GUILayout.Label("Unity Paths", EditorStyles.boldLabel);
 
@@ -1043,13 +1064,13 @@ public class OuyaPanel : EditorWindow
 
                 if (GUILayout.Button("Unity3d Training"))
                 {
-					Application.OpenURL("https://learn.unity.com/");
-				}
+                    Application.OpenURL("https://learn.unity.com/");
+                }
 
                 if (GUILayout.Button("Unity3d Scripting Reference"))
                 {
-					Application.OpenURL("https://docs.unity3d.com/2019.2/Documentation/ScriptReference/index.html");
-				}
+                    Application.OpenURL("https://docs.unity3d.com/2019.2/Documentation/ScriptReference/index.html");
+                }
 
                 break;
             case 2:
@@ -1305,7 +1326,7 @@ public class OuyaPanel : EditorWindow
                     ResetAndroidNDKPaths();
                 }
                 GUILayout.EndHorizontal();
-                
+
                 if (GUILayout.Button("Download Android NDK"))
                 {
                     Application.OpenURL("http://developer.android.com/tools/sdk/ndk/index.html");
@@ -1348,9 +1369,9 @@ public class OuyaPanel : EditorWindow
             //new LanguageDetails() { Language = Languages.EnglishAustralia, PropertySystemLanguage="en", PropertySystemCountry="AU"}, 
             //new LanguageDetails() { Language = Languages.EnglishCanada, PropertySystemLanguage="en", PropertySystemCountry="CA"}, 
             //new LanguageDetails() { Language = Languages.EnglishUnitedKingdom, PropertySystemLanguage="en", PropertySystemCountry="GB"}, 
-            new LanguageDetails() { Language = Languages.German, PropertySystemLanguage="fr", PropertySystemCountry="FR"}, 
-            new LanguageDetails() { Language = Languages.Italian, PropertySystemLanguage="it", PropertySystemCountry="IT"}, 
-            new LanguageDetails() { Language = Languages.German, PropertySystemLanguage="de", PropertySystemCountry="DE"}, 
+            new LanguageDetails() { Language = Languages.German, PropertySystemLanguage="fr", PropertySystemCountry="FR"},
+            new LanguageDetails() { Language = Languages.Italian, PropertySystemLanguage="it", PropertySystemCountry="IT"},
+            new LanguageDetails() { Language = Languages.German, PropertySystemLanguage="de", PropertySystemCountry="DE"},
             new LanguageDetails() { Language = Languages.Spanish, PropertySystemLanguage="es", PropertySystemCountry="ES"}, 
             //new LanguageDetails() { Language = Languages.Korean, PropertySystemLanguage="ko", PropertySystemCountry="KR"}, 
             //new LanguageDetails() { Language = Languages.China, PropertySystemLanguage="zh", PropertySystemCountry="CN"}, 
@@ -1415,7 +1436,7 @@ public class OuyaPanel : EditorWindow
             p.StandardInput.WriteLine("exit");
             p.WaitForExit(1);
             p.Close();
-            
+
             Thread.Sleep(1000);
         }
     }
@@ -1501,7 +1522,7 @@ public class OuyaPanel : EditorWindow
         RunProcess(environment, path, workingDirectory, arguments, ref output, ref error, string.Empty);
     }
 
-    public static void RunProcess(List<KeyValuePair<string,string>> environment, string path, string workingDirectory, string arguments, ref string output, ref string error, string description)
+    public static void RunProcess(List<KeyValuePair<string, string>> environment, string path, string workingDirectory, string arguments, ref string output, ref string error, string description)
     {
         try
         {
@@ -1529,7 +1550,7 @@ public class OuyaPanel : EditorWindow
             {
                 Debug.Log(string.Format("{0}\n[Running Process] filename={1} arguments={2}", description, process.StartInfo.FileName,
                     process.StartInfo.Arguments));
-            }            
+            }
 
             process.Start();
 
