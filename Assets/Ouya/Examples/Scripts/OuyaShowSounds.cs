@@ -96,7 +96,7 @@ public class OuyaShowSounds : MonoBehaviour
             (m_focusManager.SelectedButton == m_btnPlayMP3 &&
             OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
         {
-#if UNITY_5
+#if UNITY_5 || UNITY_2017 || UNITY_2018
             GetComponent<AudioSource>().PlayOneShot(m_soundMP3, 100);
 #else
             audio.PlayOneShot(m_soundMP3, 100);
@@ -118,7 +118,7 @@ public class OuyaShowSounds : MonoBehaviour
             (m_focusManager.SelectedButton == m_btnPlayOGG &&
             OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
         {
-#if UNITY_5
+#if UNITY_5 || UNITY_2017 || UNITY_2018
             GetComponent<AudioSource>().PlayOneShot(m_soundOGG, 100);
 #else
             audio.PlayOneShot(m_soundOGG, 100);
@@ -140,7 +140,7 @@ public class OuyaShowSounds : MonoBehaviour
             (m_focusManager.SelectedButton == m_btnPlayWAV &&
             OuyaSDK.OuyaInput.GetButtonUp(OuyaController.BUTTON_O)))
         {
-#if UNITY_5
+#if UNITY_5 || UNITY_2017 || UNITY_2018
             GetComponent<AudioSource>().PlayOneShot(m_soundWAV, 100);
 #else
             audio.PlayOneShot(m_soundWAV, 100);

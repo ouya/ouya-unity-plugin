@@ -22,6 +22,6 @@ public class OuyaSceneInit : MonoBehaviour
 
     public void Start()
     {
-        Application.LoadLevel(NextScene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(NextScene);
     }
 }

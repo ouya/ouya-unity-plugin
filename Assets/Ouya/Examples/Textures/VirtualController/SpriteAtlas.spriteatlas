@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 14ed97b6de804bd4d8e8a008511e5b32, type: 3}
+    - {fileID: 2800000, guid: 956f9f02e4051894f8b8e75a4884c3ef, type: 3}
+    - {fileID: 2800000, guid: 0b89e34cfcc0cec4cba30c6ce357f988, type: 3}
+    - {fileID: 2800000, guid: 07a1c81eba415db4b8885bc9d21b129b, type: 3}
+    - {fileID: 2800000, guid: e0d659e9e9ac1584587adada160ba11c, type: 3}
+    - {fileID: 2800000, guid: e58b33e315859bc41a1bbd1d306205f9, type: 3}
+    - {fileID: 2800000, guid: 595f0259b4d4c424596ad10d0fe0b696, type: 3}
+    - {fileID: 2800000, guid: 84e7c36b34f92494a9f46ab309711a06, type: 3}
+    - {fileID: 2800000, guid: bd42a9f9e4f55b941805f29cd5200776, type: 3}
+    - {fileID: 2800000, guid: 0d96e048e7ba53a4aa69b8440830fc4b, type: 3}
+    - {fileID: 2800000, guid: 545b8f55b4585a0489c65fc02377d113, type: 3}
+    - {fileID: 2800000, guid: 79ea09c78a2925c4a897f2e81b5ecaea, type: 3}
+    - {fileID: 2800000, guid: 932a8ad93a072dc42bfa49afa75eb96f, type: 3}
+    - {fileID: 2800000, guid: 85017131486517f4d903d7126f49c56c, type: 3}
+    - {fileID: 2800000, guid: 483f3275acdc5a745bc0641d847761e9, type: 3}
+    - {fileID: 2800000, guid: 2d87e1cb755ca244287faf69f3ea197d, type: 3}
+    - {fileID: 2800000, guid: 848ff580dfd4e35449f43eb88158c10f, type: 3}
+    - {fileID: 2800000, guid: 8dab3ac5caa63184783834ccace7388a, type: 3}
+    totalSpriteSurfaceArea: 2032128
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 848ff580dfd4e35449f43eb88158c10f, type: 3}
+  - {fileID: 21300000, guid: 85017131486517f4d903d7126f49c56c, type: 3}
+  - {fileID: 21300000, guid: 956f9f02e4051894f8b8e75a4884c3ef, type: 3}
+  - {fileID: 21300000, guid: e58b33e315859bc41a1bbd1d306205f9, type: 3}
+  - {fileID: 21300000, guid: 545b8f55b4585a0489c65fc02377d113, type: 3}
+  - {fileID: 21300000, guid: 483f3275acdc5a745bc0641d847761e9, type: 3}
+  - {fileID: 21300000, guid: 8dab3ac5caa63184783834ccace7388a, type: 3}
+  - {fileID: 21300000, guid: 14ed97b6de804bd4d8e8a008511e5b32, type: 3}
+  - {fileID: 21300000, guid: 79ea09c78a2925c4a897f2e81b5ecaea, type: 3}
+  - {fileID: 21300000, guid: 0d96e048e7ba53a4aa69b8440830fc4b, type: 3}
+  - {fileID: 21300000, guid: 595f0259b4d4c424596ad10d0fe0b696, type: 3}
+  - {fileID: 21300000, guid: 932a8ad93a072dc42bfa49afa75eb96f, type: 3}
+  - {fileID: 21300000, guid: e0d659e9e9ac1584587adada160ba11c, type: 3}
+  - {fileID: 21300000, guid: bd42a9f9e4f55b941805f29cd5200776, type: 3}
+  - {fileID: 21300000, guid: 84e7c36b34f92494a9f46ab309711a06, type: 3}
+  - {fileID: 21300000, guid: 2d87e1cb755ca244287faf69f3ea197d, type: 3}
+  - {fileID: 21300000, guid: 0b89e34cfcc0cec4cba30c6ce357f988, type: 3}
+  - {fileID: 21300000, guid: 07a1c81eba415db4b8885bc9d21b129b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - u
+  - rt
+  - controller
+  - dpad_up
+  - o
+  - thumbl
+  - y
+  - a
+  - r_stick
+  - menu
+  - l_stick
+  - rb
+  - dpad_right
+  - lt
+  - lb
+  - thumbr
+  - dpad_down
+  - dpad_left
+  m_Tag: SpriteAtlas
+  m_IsVariant: 0

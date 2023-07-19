@@ -31,11 +31,13 @@ namespace tv.ouya.sdk
     [AddComponentMenu("Event/OUYA Input Module")]
     public class OuyaInputModule : PointerInputModule
     {
-		public int m_PlayerNum = 0;
+#pragma warning disable CS0414 //
+        public int m_PlayerNum = 0;
         private float m_NextAction;
 
         private Vector2 m_LastMousePosition;
         private Vector2 m_MousePosition;
+#pragma warning restore CS0414 //
 
         protected OuyaInputModule()
         { }
@@ -103,7 +105,9 @@ namespace tv.ouya.sdk
 
             var toSelect = eventSystem.currentSelectedGameObject;
             if (toSelect == null)
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
                 toSelect = eventSystem.lastSelectedGameObject;
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
             if (toSelect == null)
                 toSelect = eventSystem.firstSelectedGameObject;
 
